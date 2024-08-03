@@ -6,7 +6,7 @@ interface Props {
 
 const Buttoon: NextPage<Props> = ({text}) => {
   return <div>
-    <Button variant="contained" >
+    <Button variant="contained" fullWidth >
           {text}
     </Button>
   </div>
