@@ -4,6 +4,9 @@ import { Box ,Container ,Typography,FormControl ,TextField, FormGroup, InputAdor
 import { useState } from 'react';
 import { Person as PersonIcon, Email as EmailIcon,Lock as LockIcon,Visibility,VisibilityOff,Facebook as FacebookIcon, Google as GoogleIcon} from '@mui/icons-material';
 import Buttoon from '@/components/Button';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { RegistersSchema } from '@/app/Utils/AuthValidation';
 
 
 
@@ -17,37 +20,50 @@ const Page: NextPage<DataForm> = ({}) => {
     const [showPassword, setShowPassword] =useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+    const { register, handleSubmit, formState: { errors } ,setError , reset } = useForm<DataForm>({
+        resolver:yupResolver(RegistersSchema),
+      });
+
+      const onSubmit = async (userData: DataForm) =>{
+        console.log(userData)
+ 
+      }
+
 
   return <>
   <Container maxWidth="lg"sx={{width:"100%",height:"100vh" ,display:"flex", justifyContent:"center", alignItems:"center"}}>
     <Box sx={{width:"30%"}}>
         <Typography variant="h5" component="h1"> Sign up For An Account</Typography>
-         <FormGroup>
+         <form onSubmit={handleSubmit(onSubmit)}>
 
         <FormControl margin='normal' >
-        <TextField id="username"  variant="outlined" placeholder='username'
+        <TextField {...register("username")}  variant="outlined" placeholder='username'
                 InputProps={{ startAdornment: (
             <InputAdornment position="start">
               <PersonIcon />
             </InputAdornment>
           ),}}
-          
+          error={!!errors.username}
+          helperText={errors.username ? errors.username.message : ""}
            />
           
         </FormControl>
 
         <FormControl margin='normal'>
-        <TextField id="Email"  variant="outlined" placeholder=' Email'
+        <TextField {...register("email")} variant="outlined" placeholder=' Email'
           InputProps={{ startAdornment: (
             <InputAdornment position="start">
               <EmailIcon />
             </InputAdornment>
           ),}}
+          error={!!errors.email}
+          helperText ={errors.email ? errors.email.message : ""}
           />
         </FormControl>
 
         <FormControl margin='normal'>
             <TextField
+            {...register("password")}
                 variant="outlined"
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Password'
@@ -69,6 +85,8 @@ const Page: NextPage<DataForm> = ({}) => {
                         </InputAdornment>
                     ),
                 }}
+                error={!!errors.password}
+          helperText ={errors.password ? errors.password.message : ""}
             />
         </FormControl>
 
@@ -105,7 +123,7 @@ const Page: NextPage<DataForm> = ({}) => {
                         </Typography>
           </Box>
 
-        </FormGroup>
+        </form>
 
     </Box>
   </Container>
