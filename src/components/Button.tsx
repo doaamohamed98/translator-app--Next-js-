@@ -7,7 +7,7 @@ interface Props {
 
 const Buttoon: NextPage<Props> = ({text}) => {
   return <div>
-    <Button variant="contained" fullWidth type='submit' >
+    <Button variant="contained" fullWidth type='submit'  sx={{textTransform:"capitalize"}}>
           {text}
     </Button>
   </div>

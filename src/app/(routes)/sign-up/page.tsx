@@ -9,7 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { RegistersSchema } from '@/app/Utils/AuthValidation';
 import { createUser } from '@/app/services/authServices';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import Link from 'next/link';
+import Signwith from '@/components/Signwith';
 
 interface DataForm {
     fullName: string;
@@ -42,7 +43,7 @@ const Page: NextPage<DataForm> = ({}) => {
 
   return <>
   <Container maxWidth="lg"sx={{width:"100%",height:"100vh" ,display:"flex", justifyContent:"center", alignItems:"center"}}>
-    <Box sx={{width:"30%"}}>
+    <Box>
         <Typography variant="h5" component="h1"> Sign up For An Account</Typography>
          <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -103,33 +104,14 @@ const Page: NextPage<DataForm> = ({}) => {
         <Buttoon text='Sign up'/>
 
 
-        <Box sx={{ display: 'flex', alignItems: 'center', marginY: 2 }}>
-                    <Divider sx={{ flexGrow: 1 }} />
-                    <Typography sx={{ marginX: 2 }} variant='body2' > or Sign up with</Typography>
-                    <Divider sx={{ flexGrow: 1 }} />
-                </Box>
-
-          <Box sx={{ display: 'flex', justifyContent:'space-evenly' , gap:2}}>
-                    <Button 
-                        variant="outlined" 
-                        startIcon={<FacebookIcon />} 
-                    >
-                        Facebook
-                    </Button>
-                    <Button 
-                        variant="outlined" 
-                        startIcon={<GoogleIcon />}   
-                    >
-                        Google
-                    </Button>
-            </Box>
+        <Signwith/>
 
           <Box sx={{ marginTop: 3, textAlign: 'center' }}>
                         <Typography variant='body2'>
                             Already have an account? 
-                            <Button variant="text" href={"/Sign-هn"}>
+                            <Link href={"/sign-in"}>
                                 Sign In
-                            </Button>
+                            </Link>
                         </Typography>
           </Box>
 
