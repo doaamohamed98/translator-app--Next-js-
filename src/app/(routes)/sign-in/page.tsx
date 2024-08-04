@@ -6,6 +6,11 @@ import { Email as EmailIcon,Lock as LockIcon,Visibility,VisibilityOff,Facebook a
 import Buttoon from '@/components/Button';
 import Signwith from '@/components/Signwith';
 import Link from 'next/link';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { LoginSchema } from '@/app/Utils/AuthValidation';
+import { LoginUser } from '@/app/services/authServices';
+import { toast } from 'react-toastify';
 
 interface LoginData {
     email:string,
@@ -16,15 +21,35 @@ interface LoginData {
 const Page: NextPage<LoginData> = ({}) => {
     const [showPassword, setShowPassword] =useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const { register: login, handleSubmit, formState: { errors } ,reset} = useForm<LoginData>({
+      resolver:yupResolver(LoginSchema),
+    });
+
+    const onSubmit= async (DataUser:LoginData)=>{
+      try{
+        const data = await LoginUser(DataUser);
+        toast.success("Login is successful")
+        reset()
+         return data
+      }catch(error:any){
+        toast.error(error.response.data.message)
+      }
+
+    }
   return <>
   <Container  maxWidth="lg"sx={{width:"100%",height:"100vh" ,display:"flex", justifyContent:"center", alignItems:"center"}}>
     <Box>
     <Typography variant="h5" component="h1"> Sign In to your Account</Typography>
     <Typography variant="caption" component="h1"> Welcome back! please enter your detail</Typography>
 
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
     <FormControl margin='normal'>
-        <TextField variant="outlined" placeholder=' Email'
+        <TextField
+         {...login("email")}
+         variant="outlined" placeholder=' Email'
+         error={!!errors.email}
+          helperText ={errors.email ? errors.email.message : ""}
           InputProps={{ startAdornment: (
             <InputAdornment position="start">
               <EmailIcon />
@@ -36,8 +61,10 @@ const Page: NextPage<LoginData> = ({}) => {
 
         <FormControl margin='normal'>
             <TextField
-           
+             {...login("password")}
                 variant="outlined"
+                error={!!errors.password}
+          helperText ={errors.password ? errors.password.message : ""}
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Password'
                 InputProps={{
