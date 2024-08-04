@@ -26,16 +26,14 @@ const Page: NextPage<DataForm> = ({}) => {
       });
 
       const onSubmit = async (userData: DataForm) =>{
-
         try{
-
             const newUser = await createUser(userData)
             toast.success("successful to Create account");
             reset()
             return newUser
             
-        }catch (error: any){
-                toast.error("Registration failed. Please try again")
+        }catch (error){
+            console.log(error)
         }
         
  
