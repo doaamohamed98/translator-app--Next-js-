@@ -7,11 +7,12 @@ import Buttoon from '@/components/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegistersSchema } from '@/app/Utils/AuthValidation';
-
-
+import { createUser } from '@/app/services/authServices';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 interface DataForm {
-    username: string;
+    fullName: string;
     email: string;
     password: string;
 }
@@ -19,13 +20,24 @@ interface DataForm {
 const Page: NextPage<DataForm> = ({}) => {
     const [showPassword, setShowPassword] =useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
+   
     const { register, handleSubmit, formState: { errors } ,setError , reset } = useForm<DataForm>({
         resolver:yupResolver(RegistersSchema),
       });
 
       const onSubmit = async (userData: DataForm) =>{
-        console.log(userData)
+
+        try{
+
+            const newUser = await createUser(userData)
+            toast.success("successful to Create account");
+            reset()
+            return newUser
+            
+        }catch (error: any){
+                toast.error("Registration failed. Please try again")
+        }
+        
  
       }
 
@@ -37,14 +49,14 @@ const Page: NextPage<DataForm> = ({}) => {
          <form onSubmit={handleSubmit(onSubmit)}>
 
         <FormControl margin='normal' >
-        <TextField {...register("username")}  variant="outlined" placeholder='username'
+        <TextField {...register("fullName")}  variant="outlined" placeholder='username'
                 InputProps={{ startAdornment: (
             <InputAdornment position="start">
               <PersonIcon />
             </InputAdornment>
           ),}}
-          error={!!errors.username}
-          helperText={errors.username ? errors.username.message : ""}
+          error={!!errors.fullName}
+          helperText={errors.fullName ? errors.fullName.message : ""}
            />
           
         </FormControl>
