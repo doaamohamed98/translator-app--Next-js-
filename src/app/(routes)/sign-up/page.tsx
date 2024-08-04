@@ -32,10 +32,15 @@ const Page: NextPage<DataForm> = ({}) => {
             reset()
             return newUser
             
-        }catch (error){
-            console.log(error)
+        }catch (error :any){
+           if(error.response.data.error==="Conflict"){
+            setError('email', {
+                type: 'manual',
+                message: "User Already Exists"});
+           }else{
+           toast.error(`Registration failed. Please try again`)
         }
-        
+    }
  
       }
 
