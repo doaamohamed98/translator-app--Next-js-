@@ -1,7 +1,8 @@
 import { NextPage } from 'next'
 import { Button } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from './them';
+import { themeButton } from '@/app/Themes/ButtonTheme';
+
 
 interface Props {
     text:string,
@@ -10,7 +11,7 @@ interface Props {
 
 const Buttoon: NextPage<Props> = ({text ,variat}) => {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeButton}>
     <Button variant={variat}  >
           {text}
     </Button>
