@@ -7,7 +7,6 @@ export default function Home() {
  
    <h1>Welcome Home pag</h1>
    <Buttoon text="Sign up" variat="contained"/>
-
    <Buttoon text="Sign in" variat="contained"/>
 
    </>
