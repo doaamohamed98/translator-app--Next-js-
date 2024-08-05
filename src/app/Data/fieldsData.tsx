@@ -13,24 +13,28 @@ import { GoEyeClosed } from "react-icons/go";
     name: string;
     icon: ReactNode;
     eyeIcon?: ReactNode;
+    type?:string
 }
 
 export const RegistersData: RegisterField[] = [
     {
      placeholder: "Enter Full name",
         name: "fullname",
+        type:"text",
          icon:<CiUser/>, 
           },
 
     { 
         placeholder: "Enter Email",
         name: "email",
+         type:"email",
          icon: <AiOutlineMail/>,
            },
 
     {
          placeholder: "Enter Password", 
          name: "password",
+         type:"password",
          icon: <CiLock />,
          eyeIcon: <GoEyeClosed />
         },
