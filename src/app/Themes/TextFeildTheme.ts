@@ -6,7 +6,7 @@ export const themeTextFeild = createTheme({
         MuiTextField: {
           styleOverrides: {
             root: {
-                margin: '10px',
+                margin: '10px 0',
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
                   borderRadius: 15,
