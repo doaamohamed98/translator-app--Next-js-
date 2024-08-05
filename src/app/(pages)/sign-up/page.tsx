@@ -9,7 +9,7 @@ interface Props {}
 
 const Page: NextPage<Props> = ({}) => {
   return(<>
-  <Container maxWidth="md"sx={{display:"flex",justifyContent:"center", alignItems:"center",width:"100%",height:"100vh"}}>
+  <Container maxWidth="md"sx={{display:"flex",justifyContent:"center", alignItems:"center",width:"100%",height:"90vh"}}>
     <Box> 
       <Typography variant='h4'>Sign up for an Account</Typography>
         <form>
