@@ -36,6 +36,6 @@ export const RegistersData: RegisterField[] = [
          name: "password",
          type:"password",
          icon: <CiLock />,
-         eyeIcon: <GoEyeClosed />
+         eyeIcon: <GoEyeClosed /> 
         },
 ]
