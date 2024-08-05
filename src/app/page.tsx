@@ -1,4 +1,4 @@
-import Buttoon from "@/components/Button-signin-signup/Button";
+import Buttoon from "@/Component/Button-signin-signup/Button";
 import styles from "./page.module.css";
 
 
