@@ -1,18 +1,18 @@
 "use client"
 import { createTheme } from '@mui/material/styles';
 
- export const theme = createTheme({
+ export const themeButton = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
+          borderRadius: 15,
           textTransform: 'capitalize', 
           fontSize: '16px', 
           background:"#2563EB",
           color:"white",
-
-          
+          width:"100%",
+          margin:"10px auto"
         },
         contained: {
           boxShadow: 'none', 
