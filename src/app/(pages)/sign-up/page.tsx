@@ -31,7 +31,13 @@ const Page: NextPage<FormData> = ({}) => {
       reset()
       return newUser
     }catch (error :any){
-     console.log(error.response)
+      if(error.response.data.error==="Conflict"){
+        setError('email', {
+            type: 'manual',
+            message: "User Already Exists"});
+       }else{
+       toast.error(`Registration failed. Please try again`)
+      }
     }
   }
 

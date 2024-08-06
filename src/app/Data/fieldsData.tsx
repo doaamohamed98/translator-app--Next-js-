@@ -14,7 +14,7 @@ import { ReactNode } from 'react';
 export const RegistersData: RegisterField[] = [
     {
      placeholder: "Enter Full name",
-        name: "fullname",
+        name: "fullName",
         type:"text",
          icon:<CiUser/>, 
           },
