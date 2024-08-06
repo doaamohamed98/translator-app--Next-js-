@@ -8,7 +8,8 @@ import Link from 'next/link'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterSchema } from '@/app/Utils/AuthValidation'
-import { createUser } from '@/app/Service/AuthService'
+import { createUser } from '@/app/Service/AuthService';
+import {  toast } from 'react-toastify';
 
 
 interface FormData {
@@ -26,12 +27,11 @@ const Page: NextPage<FormData> = ({}) => {
     console.log(data);
     try{
       const newUser = await createUser(data)
-      toast.success("successful to Create account");
+      toast.success("Successful to Create Account")
       reset()
       return newUser
-      
     }catch (error :any){
-     console.log(error)
+     console.log(error.response)
     }
   }
 

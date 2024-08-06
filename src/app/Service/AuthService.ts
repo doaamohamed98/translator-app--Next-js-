@@ -6,8 +6,9 @@ const api = axios.create({
 
 
 export const createUser = async (userData)=>{
-        const response = await api.post('/auth/signup',userData)
-        console.log(`User registration:`,response.data);
-         return response.request
+    const response = await api.post('/auth/signup',userData)
+      console.log(`User registration:`,response.data,userData);
+         return response.data
+  
   
 }
