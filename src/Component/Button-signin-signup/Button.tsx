@@ -12,7 +12,7 @@ interface Props {
 const Buttoon: NextPage<Props> = ({text ,variat}) => {
   return (
     <ThemeProvider theme={themeButton}>
-    <Button variant={variat}  >
+    <Button variant={variat} type='submit'>
           {text}
     </Button>
 

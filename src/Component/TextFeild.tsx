@@ -1,30 +1,29 @@
-"use client"
-import { ThemeProvider } from '@emotion/react'
-import { NextPage } from 'next'
-import { TextField ,TextFieldProps,InputAdornment ,IconButton } from '@mui/material';
-import { themeTextFeild } from '@/app/Themes/TextFeildTheme';
-import { useState } from 'react';
-import { GoEye } from "react-icons/go";
-import { GoEyeClosed } from "react-icons/go";
-import { RegistersData } from '@/app/Data/fieldsData';
-const TextFieldComponent: NextPage<TextFieldProps> = (Props) => {
+"use client";
 
+import { ThemeProvider } from '@emotion/react';
+import { TextField, TextFieldProps, InputAdornment, IconButton } from '@mui/material';
+import { themeTextFeild } from '@/app/Themes/TextFeildTheme';
+import { useState, forwardRef, Ref } from 'react';
+import { GoEye, GoEyeClosed } from 'react-icons/go';
+import { RegistersData } from '@/app/Data/fieldsData';
+
+const TextFieldComponent = forwardRef<HTMLInputElement, TextFieldProps>((Props, ref: Ref<HTMLInputElement>) => {
   const [showPassword, setShowPassword] = useState(false);
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const getStartIcon = () => {
-   const DataInput = RegistersData.find(input=>input.name===Props.name)
-   return DataInput ? DataInput.icon : null
+    const DataInput = RegistersData.find(input => input.name === Props.name);
+    return DataInput ? DataInput.icon : null;
   };
 
-  
   return (
     <>
    <ThemeProvider theme={themeTextFeild}>
    <TextField variant='outlined' {...Props}
-
+    inputRef={ref}
     type={Props.type==="password"? (showPassword ? "text" :"password"):Props.type}
     InputProps={{
       startAdornment: (
@@ -41,9 +40,10 @@ const TextFieldComponent: NextPage<TextFieldProps> = (Props) => {
   }}
    />
    </ThemeProvider>
-
+  
     </>
-  )
-}
+  );
+  
+});
 
-export default TextFieldComponent
+export default TextFieldComponent;
