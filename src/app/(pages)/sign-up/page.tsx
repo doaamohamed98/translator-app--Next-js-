@@ -6,6 +6,8 @@ import { Box, Container, FormControl, Typography,InputAdornment } from '@mui/mat
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { RegisterSchema } from '@/app/Utils/AuthValidation'
 
 interface FormData {
   fullname: string;
@@ -15,8 +17,10 @@ interface FormData {
 
 const Page: NextPage<FormData> = ({}) => {
   
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const onSubmit: SubmitHandler<FormData> = (data) =>{
+  const { register, handleSubmit, formState: { errors} ,setError , reset } = useForm<FormData>({
+    resolver:yupResolver(RegisterSchema),
+  });
+  const onSubmit: SubmitHandler<FormData> = (data:FormData) =>{
     console.log(data)
   }
 
@@ -33,9 +37,11 @@ const Page: NextPage<FormData> = ({}) => {
                 <TextFieldComponent 
                 type={input.type}
                 placeholder={input.placeholder}
-                name={input.name}
                 {...register(input.name)}
+                error={!!errors[input.name]}
+                  helperText={errors[input.name]?.message}
                     />
+                    
             </FormControl>
             )}
         </Box>
