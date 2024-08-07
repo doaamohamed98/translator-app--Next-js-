@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from '@emotion/react';
 import { TextField, TextFieldProps, InputAdornment, IconButton } from '@mui/material';
-import { themeTextFeild } from '@/app/Themes/TextFeildTheme';
+import { themeTextField } from '@/app/Themes/TextFeildTheme';
 import { useState, forwardRef, Ref } from 'react';
 import { GoEye, GoEyeClosed } from 'react-icons/go';
 import { RegistersData } from '@/app/Data/fieldsData';
@@ -21,7 +21,7 @@ const TextFieldComponent = forwardRef<HTMLInputElement, TextFieldProps>((Props, 
 
   return (
     <>
-   <ThemeProvider theme={themeTextFeild}>
+   <ThemeProvider theme={themeTextField}>
    <TextField variant='outlined' {...Props}
     inputRef={ref}
     type={Props.type==="password"? (showPassword ? "text" :"password"):Props.type}
