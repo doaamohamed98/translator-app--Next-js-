@@ -1,12 +1,12 @@
 "use client"
 import { createTheme } from '@mui/material/styles';
 
-export const themeTextFeild = createTheme({
+export const themeTextField = createTheme({
     components: {
         MuiTextField: {
           styleOverrides: {
             root: {
-                margin: '10px 0',
+                margin: '5px 0',
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
                   borderRadius: 15,

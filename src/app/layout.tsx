@@ -1,6 +1,8 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import type { Metadata } from "next";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -21,7 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
     <AppRouterCacheProvider>
-    <body className={inter.className}>{children}</body>
+    <body className={inter.className}>
+    <ToastContainer/>
+      <main>
+           {children}
+      </main>
+     
+      </body>
     </AppRouterCacheProvider>
       
     </html>
