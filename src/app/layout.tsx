@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { theme } from './Themes/theme';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,13 @@ export default function RootLayout({
     <AppRouterCacheProvider>
     <body className={inter.className}>
     <ToastContainer/>
-      <main>
+
+    <ThemeProvider theme={theme}>
+       <main>
            {children}
       </main>
+     
+    </ThemeProvider>
      
       </body>
     </AppRouterCacheProvider>

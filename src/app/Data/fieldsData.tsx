@@ -13,21 +13,21 @@ import { ReactNode } from 'react';
 
 export const RegistersData: RegisterField[] = [
     {
-     placeholder: "Enter Full name",
+     placeholder: "username",
         name: "fullName",
         type:"text",
          icon:<CiUser/>, 
           },
 
     { 
-        placeholder: "Enter Email",
+        placeholder: " Email",
         name: "email",
          type:"email",
          icon: <AiOutlineMail/>,
            },
 
     {
-         placeholder: "Enter Password", 
+         placeholder: " Password", 
          name: "password",
          type:"password",
          icon: <CiLock />,

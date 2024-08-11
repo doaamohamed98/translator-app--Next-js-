@@ -13,9 +13,6 @@ import FacebookIcon  from "../../../../public/Assets/icons8-facebook.svg";
 import GoogleIcon from "../../../../public/Assets/icons8-google.svg";
 import Image from "next/image";
 
-
-
-
 interface FormData {
   fullName: string;
   email: string;
@@ -47,7 +44,7 @@ const Page: NextPage<FormData> = ({}) => {
 
 
   return(<>
-  <Container maxWidth="lg"sx={{display:"flex",justifyContent:"space-around", alignItems:"center",width:"100%",height:"90vh"}}>
+  <Container maxWidth="md"sx={{display:"flex",justifyContent:"space-around", alignItems:"center",width:"100%",height:"90vh"}}>
     <Box >
       
         <form onSubmit={handleSubmit(onSubmit)}>
