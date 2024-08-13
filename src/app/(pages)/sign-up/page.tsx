@@ -1,35 +1,41 @@
-"use client"
+"use client";
 import { RegistersData } from '@/app/Data/fieldsData';
 import ButtonComponent from '@/Component/Button';
-import TextFieldComponent from '@/Component/TextField';
-import { Box, Container, FormControl, Typography,InputAdornment, Divider, FormControlLabel, Checkbox,Link } from '@mui/material';
+import { Box, Container, FormControl,Typography,Divider,FormControlLabel, Checkbox,Link, TextField, InputAdornment } from '@mui/material';
 import { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterSchema } from '@/app/Utils/AuthValidation'
 import { createUser } from '@/app/Service/AuthService';
-import {  toast } from 'react-toastify';
-import FacebookIcon  from "../../../../public/Assets/icons8-facebook.svg";
-import GoogleIcon from "../../../../public/Assets/icons8-google.svg";
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import FacebookIcon  from "@/Assets/icons8-facebook.svg";
+import GoogleIcon from "@/Assets/icons8-google.svg";
 import Image from "next/image";
+import  styles from "./style.module.scss"
+import usePasswordVisibility from '@/app/Hooks/usePasswordVisibility';
+
 
 interface FormData {
   fullName: string;
   email: string;
   password: string;
 }
-
 const Page: NextPage<FormData> = ({}) => {
+const {getPasswordInputProps} = usePasswordVisibility();
+
+const router = useRouter();
   
-  const { register, handleSubmit, formState: { errors} ,setError , reset } = useForm<FormData>({
+const { register, handleSubmit, formState: { errors} ,setError , reset } = useForm<FormData>({
     resolver:yupResolver(RegisterSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async(data:FormData) =>{
-    console.log(data);
+  
     try{
       const newUser = await createUser(data)
       toast.success("Successful to Create Account")
       reset()
+      router.push('/sign-in');
       return newUser
     }catch (error :any){
       if(error.response.data.error==="Conflict"){
@@ -44,18 +50,23 @@ const Page: NextPage<FormData> = ({}) => {
 
 
   return(<>
-  <Container maxWidth="md"sx={{display:"flex",justifyContent:"space-around", alignItems:"center",width:"100%",height:"90vh"}}>
-    <Box >
+
+  <div className={styles.Container} >
       
         <form onSubmit={handleSubmit(onSubmit)}>
          <Typography variant='h5' mb={2} fontWeight="bold">Sign up for an Account</Typography>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <div className={styles["Container_FormControl"]}>
             {RegistersData.map((input)=>
-
             <FormControl key={input.name}>
-                <TextFieldComponent 
-                type={input.type}
+                <TextField
+                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      {input.icon}
+                    </InputAdornment>
+                  ), ...(input.type === "password" ? getPasswordInputProps().InputProps : { type: input.type }),
+                }}
                 placeholder={input.placeholder}
                 {...register(input.name as keyof FormData)}
                 error={!!errors[input.name as keyof FormData]}
@@ -64,59 +75,56 @@ const Page: NextPage<FormData> = ({}) => {
                     
             </FormControl>
             )}
-            </Box>
+            </div>
 
-   <Box display="flex" alignItems="center" my={2} >
+   <div className={styles['terms-and-conditions']}>
       <FormControlLabel control={<Checkbox/>}
            label={
-          <Typography variant="caption" component="h5"  width={300} color="#64748B">
+          <Typography variant="caption" className={styles['terms-and-conditions-text']}>
             By creating an account you agree to the 
-            <Link href="/terms" sx={{ color: '#0F172A', textDecoration:"none",fontWeight: "bold" }} >
+            <Link href="/terms" className={styles['terms-and-conditions-text_Links']} >
               Terms & Conditions
             </Link> 
             and our 
-            <Link href="/privacy" sx={{ color: '#0F172A'  ,textDecoration:"none" ,fontWeight: "bold"}} >
+            <Link href="/privacy"className={styles['terms-and-conditions-text_Links']} >
               Privacy Policy
-            </Link>.
+            </Link>
           </Typography>
         }
       />
-    </Box>
+    </div>
 
 
-          <ButtonComponent text='sign up' variant="contained" type='submit'/>
+        <ButtonComponent text='sign up' variant="contained" type='submit'/>
           
 
-          <Box sx={{display:"flex", justifyContent:"space-between" ,alignItems:"center",width:"100%"}} my={2}>
+          <div className={styles['container_Or_with']}>
       <Box flex={1}>
-        <Divider sx={{color:"#64748B"}} />
+        <Divider />
       </Box>
-      <Typography variant="caption" mx={2} color="#64748B"> Or sign up with</Typography>
+      <Typography variant="caption" mx={2}> Or sign up with</Typography>
       <Box flex={1}>
-        <Divider sx={{color:"#64748B"}} />
+        <Divider />
       </Box>
-          </Box>
+          </div>
 
-        <Box sx={{display:"flex", justifyContent:"space-between" ,alignItems:"center",gap:2}}>
+        <div className={styles['button-container']}>
           <ButtonComponent text='Google' variant="outlined" type='button'
-           icon={<Image src={GoogleIcon} alt="GoogleIcon" width={20}/>} />
+           icon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}/>
           <ButtonComponent text='Google' variant="outlined"  type='button'
-          icon={<Image src={FacebookIcon} alt="FacebookIcon" width={20}/>} />
-        </Box>
+          icon={<Image src={FacebookIcon} alt="FacebookIcon" width={30}/>}/>
+        </div>
 
-        <Box sx={{display:"flex" , justifyContent:"center", alignItems:"center" }} my={2}>
-          <Typography variant='caption' component="h1"> Already have an account? 
-            <Link href={"/sign-in"} sx={{color:"#2563EB" ,textDecoration:"none",fontWeight: "bold"}}> Log In</Link>
+        <div className={styles['base_flex']}>
+          <Typography variant='caption'> Already have an account? 
+            <Link href={"/sign-in"} className={styles['base_Link']}> Log In</Link>
             </Typography>
-        </Box>
+        </div>
 
 
         </form>
 
-    </Box>
-
-
-  </Container>
+        </div>
 
   </>)
 }

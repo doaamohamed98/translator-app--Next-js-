@@ -1,0 +1,110 @@
+"use client";
+import {  Box, Container, FormControl,Typography,Divider,FormControlLabel, Checkbox,Link, TextField, InputAdornment, IconButton } from '@mui/material'
+import { NextPage } from 'next'
+import ButtonComponent from '@/Component/Button';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import {LoginSchema } from '@/app/Utils/AuthValidation'
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import FacebookIcon  from "@/Assets/icons8-facebook.svg";
+import GoogleIcon from "@/Assets/icons8-google.svg";
+import Image from "next/image";
+import  styles from "./style.module.scss"
+import usePasswordVisibility from '@/app/Hooks/usePasswordVisibility';
+import { LoginData } from '@/app/Data/fieldsData';
+import { LoginUser } from '@/app/Service/AuthService';
+
+
+interface FormData {
+  email: string;
+  password: string;
+}
+const Page: NextPage<FormData> = ({}) => {
+
+  const {getPasswordInputProps} = usePasswordVisibility();
+
+const router = useRouter();
+  
+const { register:Login, handleSubmit, formState: { errors} ,setError , reset } = useForm<FormData>({
+    resolver:yupResolver(LoginSchema),
+  });
+  const onSubmit: SubmitHandler<FormData> = async(data:FormData) =>{
+  console.log(data)
+  try{
+    const uerLogin = await LoginUser(data);
+    toast.success("Login is successful")
+      reset()
+      router.push('/Home');
+      return uerLogin
+  } catch(error:any){
+    toast.error(error.response.data.message)
+  }
+  }
+
+  return <>
+  <Container maxWidth="md">
+    <div className={styles.Container}>
+
+    <form onSubmit={handleSubmit(onSubmit)}>
+    
+       <Typography variant='h5'fontWeight="bold">Sign In to your Account</Typography>
+        <Typography variant='caption'className={styles.caption} >Welcome back! please enter your detail</Typography>
+   
+
+    <div  className={styles["Container_FormControl"]}>
+            {LoginData.map((input)=>
+            <FormControl key={input.name}>
+                <TextField
+                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      {input.icon}
+                    </InputAdornment>
+                  ), ...(input.type === "password" ? getPasswordInputProps().InputProps : { type: input.type }),
+                }}
+                placeholder={input.placeholder}
+                {...Login(input.name as keyof FormData)}
+                error={!!errors[input.name as keyof FormData]}
+                  helperText={errors[input.name as keyof FormData]?.message}
+
+                    />
+                    
+            </FormControl>
+            )}
+            </div>
+            <ButtonComponent text='sign in' variant="contained" type='submit'/>
+          
+
+          <div className={styles['container_Or_with']}>
+      <Box flex={1}>
+        <Divider />
+      </Box>
+      <Typography variant="caption" mx={2}> Or sign up with</Typography>
+      <Box flex={1}>
+        <Divider />
+      </Box>
+          </div>
+
+        <div className={styles['button-container']}>
+          <ButtonComponent text='Google' variant="outlined" type='button'
+           icon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}/>
+          <ButtonComponent text='Google' variant="outlined"  type='button'
+          icon={<Image src={FacebookIcon} alt="FacebookIcon" width={30}/>}/>
+        </div>
+
+        <div className={styles['base_flex']}>
+          <Typography variant='caption'> Don’t have an account? 
+            <Link href={"/sign-up"} className={styles['base_Link']}> Sign Up</Link>
+            </Typography>
+        </div>
+
+
+    </form>
+    </div>
+  </Container>
+  
+  </>
+}
+
+export default Page

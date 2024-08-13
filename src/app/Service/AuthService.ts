@@ -5,7 +5,13 @@ const api = axios.create({
 
 
 
-export const createUser = async (userData)=>{
+export const createUser = async (userData:any)=>{
     const response = await api.post('/auth/signup',userData)
      return response.data
 }
+
+export const LoginUser = async (userData:any)=>{
+  const response = await api.post('/auth/login',userData)
+   return response.data
+}
+
