@@ -1,7 +1,6 @@
 "use client";
-import {  Box, Container, FormControl,Typography,Divider,FormControlLabel, Checkbox,Link, TextField, InputAdornment, IconButton } from '@mui/material'
+import {  Box, Container, FormControl,Typography,Divider,Link, TextField, InputAdornment,Button } from '@mui/material'
 import { NextPage } from 'next'
-import ButtonComponent from '@/Component/Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {LoginSchema } from '@/app/Utils/AuthValidation'
@@ -73,7 +72,8 @@ const { register:Login, handleSubmit, formState: { errors} ,setError , reset } =
             </FormControl>
             )}
             </div>
-            <ButtonComponent text='sign in' variant="contained" type='submit'/>
+           
+            <Button variant="contained" type='submit' > sign in </Button>
           
 
           <div className={styles['container_Or_with']}>
@@ -87,10 +87,14 @@ const { register:Login, handleSubmit, formState: { errors} ,setError , reset } =
           </div>
 
         <div className={styles['button-container']}>
-          <ButtonComponent text='Google' variant="outlined" type='button'
-           icon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}/>
-          <ButtonComponent text='Google' variant="outlined"  type='button'
-          icon={<Image src={FacebookIcon} alt="FacebookIcon" width={30}/>}/>
+          <Button variant="outlined" type='button'
+           startIcon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}>
+             Google
+          </Button>
+          <Button variant="outlined" type='button' 
+           startIcon={<Image src={FacebookIcon} alt="FacebookIcon" width={30}/>} >
+             Facebook
+          </Button>
         </div>
 
         <div className={styles['base_flex']}>
