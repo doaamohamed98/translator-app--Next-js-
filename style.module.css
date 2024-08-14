@@ -1,0 +1,36 @@
+.base_flex, .container_Or_with, .button-container, .Container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.base_Link {
+  text-decoration: none !important;
+  font-weight: bold !important;
+}
+
+.Container {
+  width: 100%;
+  margin: 0 auto;
+  height: 90vh;
+}
+
+.button-container {
+  gap: 20px;
+}
+
+.container_Or_with {
+  width: 100%;
+  margin: 15px 0;
+  color: #64748B;
+}
+
+.Container_FormControl {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.caption {
+  color: #64748B;
+}/*# sourceMappingURL=style.module.css.map */

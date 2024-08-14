@@ -3,39 +3,50 @@ import { CiUser } from "react-icons/ci";
 import { CiLock } from "react-icons/ci";
 import { AiOutlineMail } from "react-icons/ai";
 import { ReactNode } from 'react';
-import { GoEye } from "react-icons/go";
-import { GoEyeClosed } from "react-icons/go";
 
-
-
- export interface RegisterField {
+ export interface TextField {
     placeholder: string;
     name: string;
     icon: ReactNode;
-    eyeIcon?: ReactNode;
     type?:string
 }
 
-export const RegistersData: RegisterField[] = [
+export const RegistersData: TextField[] = [
     {
-     placeholder: "Enter Full name",
-        name: "fullname",
+     placeholder: "username",
+        name: "fullName",
         type:"text",
          icon:<CiUser/>, 
           },
 
     { 
-        placeholder: "Enter Email",
+        placeholder: " Email",
         name: "email",
          type:"email",
          icon: <AiOutlineMail/>,
            },
 
     {
-         placeholder: "Enter Password", 
+         placeholder: " Password", 
          name: "password",
          type:"password",
          icon: <CiLock />,
-         eyeIcon: <GoEyeClosed />
         },
+]
+
+export const LoginData : TextField[]=[
+    { 
+        placeholder: " Email",
+        name: "email",
+         type:"email",
+         icon: <AiOutlineMail/>,
+           },
+
+    {
+         placeholder: " Password", 
+         name: "password",
+         type:"password",
+         icon: <CiLock />,
+        },
+
 ]

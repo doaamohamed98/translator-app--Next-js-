@@ -1,0 +1,14 @@
+.Container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aqua;
+}
+
+.terms-and-conditions-text_Links {
+  text-decoration: none;
+  font-weight: bold;
+  color: #0F172A;
+}/*# sourceMappingURL=style.css.map */
