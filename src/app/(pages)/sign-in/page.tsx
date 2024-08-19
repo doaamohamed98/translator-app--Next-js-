@@ -34,7 +34,7 @@ const { register:Login, handleSubmit, formState: { errors} ,setError , reset } =
     const uerLogin = await LoginUser(data);
     toast.success("Login is successful")
       reset()
-      router.push('/Home');
+      router.push('/home');
       return uerLogin
   } catch(error:any){
     toast.error(error.response.data.message)

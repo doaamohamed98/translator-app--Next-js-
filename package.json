@@ -17,6 +17,7 @@
     "@mui/material-nextjs": "^5.16.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "axios": "^1.7.3",
+    "js-cookie": "^3.0.5",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "react": "^18",
@@ -28,6 +29,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "20.14.14",
     "@types/react": "^18",
     "@types/react-dom": "^18",
