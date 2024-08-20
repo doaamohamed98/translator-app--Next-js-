@@ -68,6 +68,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
                   ), ...(input.type === "password" ? getPasswordInputProps().InputProps : { type: input.type }),
                 }}
                 placeholder={input.placeholder}
+                type={input.name === "password" ? getPasswordInputProps().type : input.type}
                 {...register(input.name as keyof RegisterFormInputs)}
                 error={!!errors[input.name as keyof RegisterFormInputs]}
                   helperText={errors[input.name as keyof RegisterFormInputs]?.message}

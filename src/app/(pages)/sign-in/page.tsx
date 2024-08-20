@@ -61,6 +61,7 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
                     </InputAdornment>
                   ), ...(input.type === "password" ? getPasswordInputProps().InputProps : { type: input.type }),
                 }}
+                type={input.name === "password" ? getPasswordInputProps().type : input.type}
                 placeholder={input.placeholder}
                 {...Login(input.name as keyof LoginFormInputs)}
                 error={!!errors[input.name as keyof LoginFormInputs]}
