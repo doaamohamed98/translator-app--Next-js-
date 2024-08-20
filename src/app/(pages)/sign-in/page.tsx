@@ -15,21 +15,20 @@ import { LoginData } from '@/app/Data/fieldsData';
 import { LoginUser } from '@/app/Service/AuthService';
 
 
-interface FormData {
+interface LoginFormInputs {
   email: string;
   password: string;
 }
-const Page: NextPage<FormData> = ({}) => {
+const Page: NextPage = () => {
 
   const {getPasswordInputProps} = usePasswordVisibility();
 
 const router = useRouter();
   
-const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<FormData>({
+const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<LoginFormInputs>({
     resolver:yupResolver(LoginSchema),
   });
-  const onSubmit: SubmitHandler<FormData> = async(data:FormData) =>{
-  console.log(data)
+  const onSubmit: SubmitHandler<LoginFormInputs> = async(data:LoginFormInputs) =>{
   try{
     const uerLogin = await LoginUser(data);
     toast.success("Login is successful")
@@ -63,9 +62,9 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Fo
                   ), ...(input.type === "password" ? getPasswordInputProps().InputProps : { type: input.type }),
                 }}
                 placeholder={input.placeholder}
-                {...Login(input.name as keyof FormData)}
-                error={!!errors[input.name as keyof FormData]}
-                  helperText={errors[input.name as keyof FormData]?.message}
+                {...Login(input.name as keyof LoginFormInputs)}
+                error={!!errors[input.name as keyof LoginFormInputs]}
+                  helperText={errors[input.name as keyof LoginFormInputs]?.message}
 
                     />
                     

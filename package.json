@@ -36,6 +36,6 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "sass": "^1.77.8",
-    "typescript": "5.5.4"
+    "typescript": "^5.5.4"
   }
 }

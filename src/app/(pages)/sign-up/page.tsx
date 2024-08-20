@@ -16,20 +16,20 @@ import  styles from "./style.module.scss"
 import usePasswordVisibility from '@/app/Hooks/usePasswordVisibility';
 
 
-interface FormData {
+interface RegisterFormInputs {
   fullName: string;
   email: string;
   password: string;
 }
-const Page: NextPage<FormData> = ({}) => {
+const Page: NextPage = () =>{
 const {getPasswordInputProps} = usePasswordVisibility();
 
 const router = useRouter();
   
-const { register, handleSubmit, formState: { errors} ,setError , reset } = useForm<FormData>({
+const { register, handleSubmit, formState: { errors} ,setError , reset } = useForm<RegisterFormInputs>({
     resolver:yupResolver(RegisterSchema),
   });
-  const onSubmit: SubmitHandler<FormData> = async(data:FormData) =>{
+  const onSubmit: SubmitHandler<RegisterFormInputs> = async(data:RegisterFormInputs) =>{
   
     try{
       const newUser = await createUser(data)
@@ -68,9 +68,9 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
                   ), ...(input.type === "password" ? getPasswordInputProps().InputProps : { type: input.type }),
                 }}
                 placeholder={input.placeholder}
-                {...register(input.name as keyof FormData)}
-                error={!!errors[input.name as keyof FormData]}
-                  helperText={errors[input.name as keyof FormData]?.message}
+                {...register(input.name as keyof RegisterFormInputs)}
+                error={!!errors[input.name as keyof RegisterFormInputs]}
+                  helperText={errors[input.name as keyof RegisterFormInputs]?.message}
                     />
                     
             </FormControl>
