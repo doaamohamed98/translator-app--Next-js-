@@ -25,7 +25,7 @@ const Page: NextPage<FormData> = ({}) => {
 
 const router = useRouter();
   
-const { register:Login, handleSubmit, formState: { errors} ,setError , reset } = useForm<FormData>({
+const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<FormData>({
     resolver:yupResolver(LoginSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async(data:FormData) =>{
