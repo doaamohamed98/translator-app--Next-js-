@@ -25,9 +25,10 @@ export default function RootLayout({
     <html lang="en">
     <AppRouterCacheProvider>
     <body className={inter.className}>
-    <ToastContainer/>
+    
 
     <ThemeProvider theme={theme}>
+    <ToastContainer theme='colored' position='top-center' autoClose={1000} />
        <main>
            {children}
       </main>
