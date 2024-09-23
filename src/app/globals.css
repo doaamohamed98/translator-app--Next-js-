@@ -1,0 +1,39 @@
+
+.ContainerNavBar{
+    display:flex;
+    justify-Content:space-between;
+     align-Content:center;
+      align-Items:center;
+}
+.ContainerLogoContent{
+    display:flex;
+    justify-Content:center;
+     align-Content:center;
+      align-Items:center;
+}
+.Containerlandingpage{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.ContainerlandingpageContent{
+   display: flex;
+   align-items: center;
+   justify-content:  space-between;
+}
+.leftContent{
+  line-height: 160px;
+}
+.caption{
+    color: gray;
+    font-family: inherit;
+}
+/* Mobile */
+@media (max-width: 700px) {
+    .ContainerlandingpageContent {
+      flex-direction: column-reverse;
+    }
+}
+
+

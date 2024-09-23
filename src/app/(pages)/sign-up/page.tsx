@@ -1,12 +1,11 @@
 "use client";
 import { RegistersData } from '@/app/Data/fieldsData';
-
 import { Box, Button, FormControl,Typography,Divider,FormControlLabel, Checkbox,Link, TextField, InputAdornment } from '@mui/material';
 import { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterSchema } from '@/app/Utils/AuthValidation'
-import { createUser } from '@/app/Service/AuthService';
+import { createUser } from '@/app/Services/AuthService';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import FacebookIcon  from "@/Assets/icons8-facebook.svg";
@@ -53,7 +52,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
 
   <div className={styles.Container} >
       
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
          <Typography variant='h5' mb={2} fontWeight="bold">Sign up for an Account</Typography>
 
             <div className={styles["Container_FormControl"]}>

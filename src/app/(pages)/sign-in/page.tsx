@@ -12,7 +12,7 @@ import Image from "next/image";
 import  styles from "./style.module.scss"
 import usePasswordVisibility from '@/app/Hooks/usePasswordVisibility';
 import { LoginData } from '@/app/Data/fieldsData';
-import { LoginUser } from '@/app/Service/AuthService';
+import { LoginUser } from '@/app/Services/AuthService';
 
 
 interface LoginFormInputs {
@@ -41,10 +41,10 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
   }
 
   return <>
-  <Container maxWidth="md">
+  <Container >
     <div className={styles.Container}>
 
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
     
        <Typography variant='h5'fontWeight="bold">Sign In to your Account</Typography>
         <Typography variant='caption'className={styles.caption} >Welcome back! please enter your detail</Typography>

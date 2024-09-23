@@ -18,6 +18,10 @@ $secondary-color:#64748B;
   height: 90vh;
   @extend .base_flex;
 }
+.form{
+  max-width: 40%;
+   
+ }
 
 .button-container{
   gap: 20px;
