@@ -26,12 +26,12 @@ export default function Home() {
 
        <Box className='leftContent' >
        <Typography variant="h3" className="title-landingpage">
-       Get A Quick,Free Translation
+       Get A Quick &rsquo;Free Translation
        with Ease Translate
       </Typography>
       
       <Typography className="caption">
-      "Translate your texts quickly and accurately for free with Ease Translate. Try it now and enjoy instant translations for all your needs!"
+      &quot; Translate your texts quickly and accurately for free with Ease Translate. Try it now and enjoy instant translations for all your needs &quot;
       </Typography>
         
         <Button variant="contained" href="/sign-up"> Register </Button>
