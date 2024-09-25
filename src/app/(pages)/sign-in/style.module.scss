@@ -20,7 +20,13 @@ $secondary-color:#64748B;
 }
 .form{
   max-width: 40%;
-   
+  @media (min-width: 768px) and (max-width: 1199px) {
+    max-width: 100%;
+  }
+   @media (max-width: 767px){
+    max-width: 100%;
+  }
+    
  }
 
 .button-container{

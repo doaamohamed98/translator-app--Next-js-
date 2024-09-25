@@ -521,8 +521,8 @@ const TranslationSubmit = (data: TranslatData) => {
         <TableHead>
           <TableRow className={styles.TableRow}>
             <TableCell>Key</TableCell>
-            <TableCell>Delete</TableCell>
-            <TableCell>Update</TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
             <TableCell>Text</TableCell>
             <TableCell>Languages</TableCell>
             <TableCell>Translations</TableCell>
@@ -534,16 +534,22 @@ const TranslationSubmit = (data: TranslatData) => {
       <TableRow key={data.id}>
       <TableCell>{data.key}</TableCell>
          <TableCell>
-          <RiDeleteBin5Line onClick={()=>handelDeleteTranslation(selectedProject._id,data.id)}/>
+          <Button>
+            <RiDeleteBin5Line onClick={()=>handelDeleteTranslation(selectedProject._id,data.id)}/>
+          </Button>
+          
           </TableCell>
           <TableCell>
-          <CiEdit  onClick={() => {
+            <Button>
+              <CiEdit  onClick={() => {
                     setSelectedRowId(data.id);
                     const languagesForKey = Object.keys(translations.dictionary).filter((lang) => 
                       translations.dictionary[lang][data.key]);
                     setSelectedLanguages(languagesForKey);
                     setUpdateDialogOpen(true);
                   }} />
+            </Button>
+          
           </TableCell>
 
           <TableCell>

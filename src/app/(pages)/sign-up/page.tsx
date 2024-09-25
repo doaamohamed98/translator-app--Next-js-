@@ -77,7 +77,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
             )}
             </div>
 
-   <div className={styles['terms-and-conditions']}>
+   {/* <div className={styles['terms-and-conditions']}>
       <FormControlLabel control={<Checkbox/>}
            label={
           <Typography variant="caption" className={styles['terms-and-conditions-text']}>
@@ -92,7 +92,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
           </Typography>
         }
       />
-    </div>
+    </div> */}
 
         <Button variant="contained" type='submit' >
         sign up
