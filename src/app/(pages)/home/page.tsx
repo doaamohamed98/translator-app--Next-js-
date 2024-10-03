@@ -400,7 +400,7 @@ const TranslationSubmit = (data: TranslatData) => {
       label="Project Title"
       variant="outlined"
       fullWidth
-      {...control.register("title", { required: "Project title is required." })}
+      {...control.register("title",)}
       error={!!errors.title}
       helperText={errors.title?.message}
     />
@@ -476,16 +476,16 @@ const TranslationSubmit = (data: TranslatData) => {
     
   )}  
      {value === 1 && (
-    <Box  sx={{ textAlign: "center", mt: 2 }}>
+    <Box >
+     
       <form onSubmit={handleTranslationSubmit(TranslationSubmit)}>
-      <TableContainer>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table" >
+      <TableContainer  >
+      <Table >
         <TableHead>
-          <TableRow className={styles.TableRow}>
+          <TableRow>
             <TableCell>Key</TableCell>
             <TableCell >Text</TableCell>
             <TableCell>Translation</TableCell>
-            <TableCell> </TableCell>
           </TableRow>
         </TableHead>
 
@@ -513,34 +513,56 @@ const TranslationSubmit = (data: TranslatData) => {
       </TableContainer>
       </form>
 
+      
+      
+
       {selectedProject && translations && (
   <Box sx={{ textAlign: "center",}}>
-    <Typography> Project name : {selectedProject.title}</Typography>
-    <TableContainer>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+    <Typography className={styles.ProjectName}> Project name : {selectedProject.title}</Typography>
+    <TableContainer className={styles.table}  >
+      <Table >
         <TableHead>
           <TableRow className={styles.TableRow}>
             <TableCell>Key</TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
             <TableCell>Text</TableCell>
             <TableCell>Languages</TableCell>
             <TableCell>Translations</TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         
         <TableBody>
        {translations.data.map((data: any) => (
       <TableRow key={data.id}>
+        {/* Key */}
       <TableCell>{data.key}</TableCell>
-         <TableCell>
-          <Button>
-            <RiDeleteBin5Line onClick={()=>handelDeleteTranslation(selectedProject._id,data.id)}/>
-          </Button>
-          
-          </TableCell>
+          {/* Text */}
           <TableCell>
-            <Button>
+           <Typography>{translations.dictionary.en[data.key]}</Typography>
+          </TableCell>
+
+          {/* Languages */}
+          <TableCell>
+          {Object.keys(translations.dictionary).map((lang) => (
+                <Typography key={lang}>
+                    {lang}
+                </Typography>
+        ))}
+          </TableCell>
+
+          {/* Translations */}
+          <TableCell >
+          {Object.keys(translations.dictionary).map((langKey) => (
+                <Typography key={langKey}>
+                    {translations.dictionary[langKey][data.key]}
+                </Typography>
+        ))}
+          </TableCell>
+          
+          {/* Update */}
+          <TableCell>
+            <Button variant="contained">
               <CiEdit  onClick={() => {
                     setSelectedRowId(data.id);
                     const languagesForKey = Object.keys(translations.dictionary).filter((lang) => 
@@ -552,22 +574,11 @@ const TranslationSubmit = (data: TranslatData) => {
           
           </TableCell>
 
-          <TableCell>
-           <Typography>{translations.dictionary.en[data.key]}</Typography>
-          </TableCell>
-          <TableCell>
-          {Object.keys(translations.dictionary).map((lang) => (
-                <Typography key={lang}>
-                    {lang}
-                </Typography>
-        ))}
-          </TableCell>
-          <TableCell >
-          {Object.keys(translations.dictionary).map((langKey) => (
-                <Typography key={langKey}>
-                    {translations.dictionary[langKey][data.key]}
-                </Typography>
-        ))}
+          {/* Delete */}
+         <TableCell>
+          <Button variant="contained">
+            <RiDeleteBin5Line onClick={()=>handelDeleteTranslation(selectedProject._id,data.id)}/>
+          </Button>
           </TableCell>
      </TableRow>
   ))}

@@ -52,18 +52,10 @@ $divider-color: #e0e0e0;
   margin-top: auto; 
 }
 
-// //AppBar
-// .appBar{
-//   background-color: white;
-//   color: black;
-//   width: calc(100% - 230px);
-//   margin-left: 250px; 
+.ProjectName{
+ color: $primary-color ;
+}
 
-//   @media (min-width: 600px) { 
-//     width: 100%; 
-//     margin-left: 0; 
-//   }
-// }
 
 .toolbar {
   display: flex;
@@ -81,7 +73,7 @@ $divider-color: #e0e0e0;
 .logoImage {
   display: block;
 
-  @media (min-width: 600px) { 
+  @media (min-width: 767px) { 
     display: none;
   }
 }
@@ -92,7 +84,7 @@ $divider-color: #e0e0e0;
   display: none;
   color:$text-color ;
 
-  @media (min-width: 600px) { 
+  @media (min-width: 767px) { 
     display: block;
   }
 }
@@ -114,7 +106,7 @@ $divider-color: #e0e0e0;
   align-items: center;
   
   margin-top: 15px;
-  @media (max-width: 600px) { 
+  @media (max-width: 767px) { 
     flex-direction: column;
   }
 }
@@ -129,7 +121,21 @@ $divider-color: #e0e0e0;
   cursor: pointer;
 }
 
+.table{
+ @media (max-width: 767px) { 
+  width: 60% !important;
+  margin: 0 auto;
+
+}
+}
+
+// .ContainerTranslation{
+//   text-align: center;
+//   margin: 0 auto;
+
+// }
+
 .TableRow{
-  background-color: $primary-color;
+  background-color: $primary-color ;
   text-align: center;
 }

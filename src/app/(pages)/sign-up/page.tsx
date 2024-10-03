@@ -99,7 +99,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
         </Button>
           
 
-          <div className={styles['container_Or_with']}>
+          <div className={styles.container_Or_with}>
       <Box flex={1}>
         <Divider />
       </Box>
@@ -109,7 +109,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
       </Box>
           </div>
 
-          <div className={styles['button-container']}>
+          <div className={styles.button_container}>
           <Button variant="outlined" type='button'
            startIcon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}>
              Google
@@ -120,7 +120,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
           </Button>
         </div>
 
-        <div className={styles['base_flex']}>
+        <div className={styles.base_flex}>
           <Typography variant='caption'> Already have an account? 
             <Link href={"/sign-in"} className={styles['base_Link']}> Log In</Link>
             </Typography>

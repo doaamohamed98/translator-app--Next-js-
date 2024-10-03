@@ -104,7 +104,7 @@ export const theme = createTheme({
         },
       },
     },
-
+   
     MuiTableHead: {
       styleOverrides: {
         root: {
@@ -113,6 +113,22 @@ export const theme = createTheme({
             fontSize: '16px',
             fontWeight: '600',
           },
+        },
+      },
+    },
+    MuiTableCell:{
+      styleOverrides: {
+        root: {
+          fontSize: '16px',
+          fontWeight: '600',
+          padding: '12px', 
+          whiteSpace: 'nowrap', 
+          overflow: 'hidden', 
+          '@media (max-width: 700px)':{
+            overflow: 'scroll',
+            
+          }
+         
         },
       },
     },

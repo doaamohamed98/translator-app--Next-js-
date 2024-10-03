@@ -50,7 +50,7 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
         <Typography variant='caption'className={styles.caption} >Welcome back! please enter your detail</Typography>
    
 
-    <div  className={styles["Container_FormControl"]}>
+    <div  className={styles.Container_FormControl}>
             {LoginData.map((input)=>
             <FormControl key={input.name}>
                 <TextField
@@ -76,7 +76,7 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
             <Button variant="contained" type='submit' > sign in </Button>
           
 
-          <div className={styles['container_Or_with']}>
+          <div className={styles.container_Or_with}>
       <Box flex={1}>
         <Divider />
       </Box>
@@ -86,7 +86,7 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
       </Box>
           </div>
 
-        <div className={styles['button-container']}>
+        <div className={styles.button_container}>
           <Button variant="outlined" type='button'
            startIcon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}>
              Google
@@ -97,9 +97,9 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
           </Button>
         </div>
 
-        <div className={styles['base_flex']}>
+        <div className={styles.base_flex}>
           <Typography variant='caption'> Don’t have an account? 
-            <Link href={"/sign-up"} className={styles['base_Link']}> Sign Up</Link>
+            <Link href={"/sign-up"} className={styles.base_Link}> Sign Up</Link>
             </Typography>
         </div>
 
