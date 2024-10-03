@@ -26,7 +26,7 @@ export default function Home() {
 
        <Box className='leftContent' >
        <Typography variant="h3" className="title-landingpage">
-       Get A Quick &rsquo;Free Translation
+       Get A Quick Free Translation
        with Ease Translate
       </Typography>
       
