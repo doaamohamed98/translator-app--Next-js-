@@ -13,7 +13,7 @@ import { ReactNode } from 'react';
 
 export const RegistersData: TextField[] = [
     {
-     placeholder: "username",
+     placeholder: "Full Name",
         name: "fullName",
         type:"text",
          icon:<CiUser/>, 

@@ -14,3 +14,4 @@ export const LoginSchema = yup.object().shape({
     email:yup.string().trim().required('Email is required').matches(emailRegex, 'Invalid email'),
     password:yup.string().trim().required('Password is required'),
 });
+

@@ -1,0 +1,141 @@
+
+$primary-color: #2563EB;
+$text-color: #64748B;
+$background-color: white;
+$divider-color: #e0e0e0;
+
+.sidebarContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  height: 100vh;
+}
+
+.logoContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  padding: 11px;
+}
+
+.projectButton {
+  margin-top: 15px;
+}
+.projectList {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; 
+  overflow-y: auto;
+  color: $text-color;
+  text-transform:capitalize;
+}
+
+.projectList::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.projectList::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px; 
+}
+
+.projectList::-webkit-scrollbar-track {
+  background-color: $background-color; 
+}
+
+.projectList::-webkit-scrollbar-button {
+  display: none; 
+}
+
+.footerList {
+  margin-top: auto; 
+}
+
+.ProjectName{
+ color: $primary-color ;
+}
+
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoImage {
+  display: block;
+
+  @media (min-width: 767px) { 
+    display: none;
+  }
+}
+
+
+
+.subtitle {
+  display: none;
+  color:$text-color ;
+
+  @media (min-width: 767px) { 
+    display: block;
+  }
+}
+
+// .menuButton {
+//   margin-right: 16px;
+//   display: block;
+//   background-color: #64748B;
+
+//   @media (min-width: 600px) { 
+//     display: none;
+//   }
+// }
+
+.cardContainer{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  
+  margin-top: 15px;
+  @media (max-width: 767px) { 
+    flex-direction: column;
+  }
+}
+
+.Card{
+  background-color: #f4f4f4 !important;
+  width: 20%;
+  height: 100px;
+  gap: 10px;
+  text-align: center;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.table{
+ @media (max-width: 767px) { 
+  width: 60% !important;
+  margin: 0 auto;
+
+}
+}
+
+// .ContainerTranslation{
+//   text-align: center;
+//   margin: 0 auto;
+
+// }
+
+.TableRow{
+  background-color: $primary-color ;
+  text-align: center;
+}

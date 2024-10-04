@@ -1,12 +1,11 @@
 "use client";
 import { RegistersData } from '@/app/Data/fieldsData';
-
 import { Box, Button, FormControl,Typography,Divider,FormControlLabel, Checkbox,Link, TextField, InputAdornment } from '@mui/material';
 import { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterSchema } from '@/app/Utils/AuthValidation'
-import { createUser } from '@/app/Service/AuthService';
+import { createUser } from '@/app/Services/AuthService';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import FacebookIcon  from "@/Assets/icons8-facebook.svg";
@@ -53,7 +52,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
 
   <div className={styles.Container} >
       
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
          <Typography variant='h5' mb={2} fontWeight="bold">Sign up for an Account</Typography>
 
             <div className={styles["Container_FormControl"]}>
@@ -78,7 +77,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
             )}
             </div>
 
-   <div className={styles['terms-and-conditions']}>
+   {/* <div className={styles['terms-and-conditions']}>
       <FormControlLabel control={<Checkbox/>}
            label={
           <Typography variant="caption" className={styles['terms-and-conditions-text']}>
@@ -93,14 +92,14 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
           </Typography>
         }
       />
-    </div>
+    </div> */}
 
         <Button variant="contained" type='submit' >
         sign up
         </Button>
           
 
-          <div className={styles['container_Or_with']}>
+          <div className={styles.container_Or_with}>
       <Box flex={1}>
         <Divider />
       </Box>
@@ -110,7 +109,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
       </Box>
           </div>
 
-          <div className={styles['button-container']}>
+          <div className={styles.button_container}>
           <Button variant="outlined" type='button'
            startIcon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}>
              Google
@@ -121,7 +120,7 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
           </Button>
         </div>
 
-        <div className={styles['base_flex']}>
+        <div className={styles.base_flex}>
           <Typography variant='caption'> Already have an account? 
             <Link href={"/sign-in"} className={styles['base_Link']}> Log In</Link>
             </Typography>

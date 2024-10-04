@@ -3,11 +3,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-    const protectedPaths = ['/home', '/'];
+    const protectedPaths = ['/home'];
 
     const authToken = request.cookies.get('authToken')?.value;
-    // console.log(authToken);
-
     const isProtectedPath = protectedPaths.some((path) =>
         request.nextUrl.pathname.startsWith(path)
     );
@@ -20,6 +18,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/home', '/'], 
+    matcher: ['/home',], 
 };
 

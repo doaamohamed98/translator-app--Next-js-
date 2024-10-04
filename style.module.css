@@ -1,36 +1,80 @@
-.base_flex, .container_Or_with, .button-container, .Container {
+.sidebarContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  height: 100vh;
+}
+
+.logoContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  padding: 11px;
+}
+
+.projectButton {
+  margin-top: 15px;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  color: #64748B;
+  text-transform: capitalize;
+}
+
+.projectList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.projectList::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.projectList::-webkit-scrollbar-track {
+  background-color: white;
+}
+
+.projectList::-webkit-scrollbar-button {
+  display: none;
+}
+
+.footerList {
+  margin-top: auto;
+}
+
+.toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.base_Link {
-  text-decoration: none !important;
-  font-weight: bold !important;
-}
-
-.Container {
-  width: 100%;
-  margin: 0 auto;
-  height: 90vh;
-}
-
-.button-container {
-  gap: 20px;
-}
-
-.container_Or_with {
-  width: 100%;
-  margin: 15px 0;
-  color: #64748B;
-}
-
-.Container_FormControl {
+.logoContainer {
   display: flex;
-  flex-direction: column;
-  margin-top: 20px;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
-.caption {
+.logoImage {
+  display: block;
+}
+@media (min-width: 600px) {
+  .logoImage {
+    display: none;
+  }
+}
+
+.subtitle {
+  display: none;
   color: #64748B;
+}
+@media (min-width: 600px) {
+  .subtitle {
+    display: block;
+  }
 }/*# sourceMappingURL=style.module.css.map */
