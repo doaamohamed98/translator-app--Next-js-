@@ -42,7 +42,7 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
 
   return <>
   <Container >
-    <div className={styles.Container}>
+    <Box className={styles.Container}>
 
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
     
@@ -50,7 +50,7 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
         <Typography variant='caption'className={styles.caption} >Welcome back! please enter your detail</Typography>
    
 
-    <div  className={styles.Container_FormControl}>
+    <Box  className={styles.Container_FormControl}>
             {LoginData.map((input)=>
             <FormControl key={input.name}>
                 <TextField
@@ -71,22 +71,22 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
                     
             </FormControl>
             )}
-            </div>
+            </Box>
            
             <Button variant="contained" type='submit' > sign in </Button>
           
 
-          <div className={styles.container_Or_with}>
-      <Box flex={1}>
+          <Box className={styles.container_Or_with}>
+      <Box className={styles.Divider} >
         <Divider />
       </Box>
-      <Typography variant="caption" mx={2}> Or sign up with</Typography>
-      <Box flex={1}>
+      <Typography variant="caption" > Or sign up with</Typography>
+      <Box className={styles.Divider} >
         <Divider />
       </Box>
-          </div>
+          </Box>
 
-        <div className={styles.button_container}>
+        <Box className={styles.buttonProviderContainer}>
           <Button variant="outlined" type='button'
            startIcon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}>
              Google
@@ -95,17 +95,17 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
            startIcon={<Image src={FacebookIcon} alt="FacebookIcon" width={30}/>} >
              Facebook
           </Button>
-        </div>
+        </Box>
 
-        <div className={styles.base_flex}>
+        <Box className={styles.baseFlex}>
           <Typography variant='caption'> Don’t have an account? 
-            <Link href={"/sign-up"} className={styles.base_Link}> Sign Up</Link>
+            <Link href={"/sign-up"} className={styles.baseLink}> Sign Up</Link>
             </Typography>
-        </div>
+        </Box>
 
 
     </form>
-    </div>
+    </Box>
   </Container>
   
   </>

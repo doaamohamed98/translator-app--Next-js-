@@ -19,7 +19,6 @@ export default function Home() {
     </Box>
    </Box>
 
-   
     <Box className="Containerlandingpage"> 
 
       <Box className='ContainerlandingpageContent'>

@@ -2,12 +2,12 @@ $primary-color: #0F172A;
 $secondary-color:#64748B;
 
 
-.base_flex{
+.baseFlex{
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.base_Link{
+.baseLink{
   text-decoration: none !important ; 
   font-weight: bold !important;
 }
@@ -16,8 +16,7 @@ $secondary-color:#64748B;
   width: 100%;
   margin: 0 auto;
   height: 90vh;
-  @extend .base_flex;
-}
+  @extend .baseFlex;
 .form{
   max-width: 40%;
   @media (min-width: 768px) and (max-width: 1199px) {
@@ -26,27 +25,35 @@ $secondary-color:#64748B;
    @media (max-width: 767px){
     max-width: 100%;
   }
+
+  .buttonProviderContainer{
+    gap: 20px;
+    @extend .baseFlex;
+  }
+  .container_Or_with{ 
+    width: 100%;
+    margin: 15px 0;
+    color: $secondary-color;
+    @extend .baseFlex
+  }
+  
+  .Container_FormControl{
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+    
+  .caption{
+    color: $secondary-color;
+  
+  }
+
+  .Divider{
+    flex: 1;
+  }
     
  }
 
-.button_container{
-  gap: 20px;
-  @extend .base_flex
-}
-.container_Or_with{ 
-  width: 100%;
-  margin: 15px 0;
-  color: $secondary-color;
-  @extend .base_flex
 }
 
-.Container_FormControl{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  
-.caption{
-  color: $secondary-color;
 
-}
