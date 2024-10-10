@@ -1,0 +1,27 @@
+$text-color: #64748B;
+$hover-color-Icon:#de0a0a;
+$hover-Bgcolor-ListItem:#f1f1f1;
+$hover-text-color-ListItem:#2d8fff;
+
+.ListItem{
+cursor: pointer;
+width: 100%;
+padding: 0 30px;
+border-radius: 5px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+ text-transform:capitalize;
+ color: $text-color;
+font-size: 1.2rem;
+&:hover {
+    background-color: $hover-Bgcolor-ListItem; 
+    color:$hover-text-color-ListItem ;
+  }
+.DeleteIcon{
+    &:hover {
+        color: $hover-color-Icon; 
+      }
+}
+
+}

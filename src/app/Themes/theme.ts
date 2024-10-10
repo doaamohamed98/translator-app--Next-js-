@@ -72,6 +72,21 @@ export const theme = createTheme({
             },
           },
 
+          //ThemeDrawe
+          MuiDrawer: {
+            styleOverrides: {
+              root: {
+                '& .MuiDrawer-paper': {
+                  padding: '20px', 
+                  width: '240px',
+                  
+                },
+              },
+            },
+          },
+       
+
+
 
       },
 
