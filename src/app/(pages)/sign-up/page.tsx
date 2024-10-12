@@ -1,12 +1,11 @@
 "use client";
 import { RegistersData } from '@/app/Data/fieldsData';
-
 import { Box, Button, FormControl,Typography,Divider,FormControlLabel, Checkbox,Link, TextField, InputAdornment } from '@mui/material';
 import { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterSchema } from '@/app/Utils/AuthValidation'
-import { createUser } from '@/app/Service/AuthService';
+import { createUser } from '@/app/Services/AuthService';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import FacebookIcon  from "@/Assets/icons8-facebook.svg";
@@ -25,12 +24,11 @@ const Page: NextPage = () =>{
 const {getPasswordInputProps} = usePasswordVisibility();
 
 const router = useRouter();
-  
+  //React-hook-form
 const { register, handleSubmit, formState: { errors} ,setError , reset } = useForm<RegisterFormInputs>({
     resolver:yupResolver(RegisterSchema),
   });
   const onSubmit: SubmitHandler<RegisterFormInputs> = async(data:RegisterFormInputs) =>{
-  
     try{
       const newUser = await createUser(data)
       toast.success("Successful to Create Account")
@@ -51,12 +49,12 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
 
   return(<>
 
-  <div className={styles.Container} >
+  <Box className={styles.Container} >
       
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
          <Typography variant='h5' mb={2} fontWeight="bold">Sign up for an Account</Typography>
 
-            <div className={styles["Container_FormControl"]}>
+            <Box className={styles.ContainerFormControl}>
             {RegistersData.map((input)=>
             <FormControl key={input.name}>
                 <TextField
@@ -76,9 +74,9 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
                     
             </FormControl>
             )}
-            </div>
+            </Box>
 
-   <div className={styles['terms-and-conditions']}>
+   {/* <div className={styles['terms-and-conditions']}>
       <FormControlLabel control={<Checkbox/>}
            label={
           <Typography variant="caption" className={styles['terms-and-conditions-text']}>
@@ -93,24 +91,28 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
           </Typography>
         }
       />
-    </div>
+    </div> */}
 
         <Button variant="contained" type='submit' >
         sign up
         </Button>
           
 
-          <div className={styles['container_Or_with']}>
-      <Box flex={1}>
-        <Divider />
-      </Box>
-      <Typography variant="caption" mx={2}> Or sign up with</Typography>
-      <Box flex={1}>
-        <Divider />
-      </Box>
-          </div>
+      <Box className={styles.container_Or_with}>
 
-          <div className={styles['button-container']}>
+      
+        <Divider className={styles.Divider} />
+     
+
+      <Typography variant="caption" mx={2}> Or sign up with</Typography>
+
+      
+        <Divider className={styles.Divider} />
+     
+      
+          </Box>
+
+          <Box className={styles.buttonProviderContainer}>
           <Button variant="outlined" type='button'
            startIcon={<Image src={GoogleIcon} alt="GoogleIcon" width={30}/>}>
              Google
@@ -119,18 +121,18 @@ const { register, handleSubmit, formState: { errors} ,setError , reset } = useFo
            startIcon={<Image src={FacebookIcon} alt="FacebookIcon" width={30}/>} >
              Facebook
           </Button>
-        </div>
+        </Box>
 
-        <div className={styles['base_flex']}>
+        <Box className={styles.base_flex}>
           <Typography variant='caption'> Already have an account? 
-            <Link href={"/sign-in"} className={styles['base_Link']}> Log In</Link>
+            <Link href={"/sign-in"} className={styles.base_Link}> Log In</Link>
             </Typography>
-        </div>
+        </Box>
 
 
         </form>
 
-        </div>
+        </Box>
 
   </>)
 }

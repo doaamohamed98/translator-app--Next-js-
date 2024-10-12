@@ -10,42 +10,76 @@ $secondary-color:#64748B;
 .base_Link{
   text-decoration: none !important ; 
   font-weight: bold !important;
+  
 }
 
  .Container {
-  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   height: 90vh;
   @extend .base_flex;
+  @media (max-width: 760px){
+    font-size: 10px;
+  };
+}
+.form{
+ max-width: 30%;
+ @media (min-width: 760px) and (max-width: 1199px) {
+  max-width: 80%;
+}
+ @media (max-width: 760px){
+  max-width: 100%;
 }
 
-.button-container{
-  gap: 20px;
-  @extend .base_flex
-}
-.container_Or_with{ 
-  width: 100%;
-  margin: 15px 0;
-  color: $secondary-color;
-  @extend .base_flex
-}
-
-
-.terms-and-conditions{
- margin: 15px 0;
-
-}
-
-
-.terms-and-conditions-text{
-  color:$secondary-color !important;
-}
-.terms-and-conditions-text_Links{
-  @extend .base_Link;
-  color:$primary-color !important;
-}
-
-.Container_FormControl{
+.ContainerFormControl{
   display: flex;
   flex-direction: column;
 }
+
+.buttonProviderContainer{
+  gap: 20px;
+  @extend .base_flex;
+  @media (max-width: 760px){
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+}
+
+.container_Or_with{ 
+  width: 100%;
+  margin: 10px 0;
+  color: $secondary-color;
+  @extend .base_flex
+}
+.Divider{
+  flex: 1;
+}
+
+}
+
+
+
+
+
+
+
+// .terms-and-conditions-text{
+//  color:$secondary-color !important;
+// }
+
+// .terms-and-conditions{
+//   margin: 15px 0;
+//   @media (max-width: 767px){
+//    font-size: 5px;
+//  };
+ 
+ 
+//  }
+// .terms-and-conditions-text_Links{
+//   @extend .base_Link;
+//   color:$primary-color !important;
+// }
+
+

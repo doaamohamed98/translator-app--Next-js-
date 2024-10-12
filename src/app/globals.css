@@ -1,0 +1,57 @@
+.mainContainer{
+  max-width: 100%;
+ 
+}
+.ContainerNavBar{
+    display:flex;
+    justify-Content:space-between;
+     align-Content:center;
+      align-Items:center;
+}
+.ContainerLogoContent{
+    display:flex;
+    justify-Content:center;
+     align-Content:center;
+      align-Items:center;
+}
+.Containerlandingpage{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.ContainerlandingpageContent{
+   display: flex;
+   align-items: center;
+   justify-content:  space-between;
+   width: 100%;
+}
+
+.title-landingpage{
+  font-weight: 500 !important;
+  font-family: monospace !important ;
+  font-size: 2.5rem !important ;
+  margin: 20px 0 !important;
+
+}
+.caption{
+    color: gray;
+    margin: 20px 0 !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .ContainerlandingpageContent {
+      flex-direction: column-reverse;
+    }
+     
+     .title-landingpage{
+      font-size: 2rem !important ;
+    }
+    .caption{
+      font-size: 1rem !important ;
+    } 
+    
+}
+
+

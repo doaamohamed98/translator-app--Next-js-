@@ -18,8 +18,3 @@ export const LoginUser = async (userData:any)=>{
    return authToken
 }
 
-// export const isAuthenticated = (): boolean => {
-//   const authToken = Cookies.get('authToken');
-//   return !!authToken;
-// };
-// console.log(isAuthenticated());
