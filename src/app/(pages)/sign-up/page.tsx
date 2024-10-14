@@ -6,7 +6,7 @@ import { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterSchema } from '@/app/Utils/AuthValidation'
-import { createUser } from '@/app/Service/AuthService';
+import { createUser } from '@/app/Service/AuthServices';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import FacebookIcon  from "@/Assets/icons8-facebook.svg";

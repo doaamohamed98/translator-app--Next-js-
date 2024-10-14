@@ -37,5 +37,8 @@ $drawerWidth: 240px;
 
       .FooterList{
         margin-top: auto; 
+        .LogOut{
+          cursor: pointer;
+        }
       }
 }

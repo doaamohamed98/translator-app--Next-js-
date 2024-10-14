@@ -12,7 +12,7 @@ import Image from "next/image";
 import  styles from "./style.module.scss"
 import usePasswordVisibility from '@/app/Hooks/usePasswordVisibility';
 import { LoginData } from '@/app/Data/fieldsData';
-import { LoginUser } from '@/app/Service/AuthService';
+import { LoginUser } from '@/app/Service/AuthServices';
 
 
 interface LoginFormInputs {
@@ -33,7 +33,7 @@ const { register:Login, handleSubmit, formState: { errors} ,reset } = useForm<Lo
     const uerLogin = await LoginUser(data);
     toast.success("Login is successful")
       reset()
-      router.push('/home');
+      router.push('/projects');
       return uerLogin
   } catch(error:any){
     toast.error(error.response.data.message)

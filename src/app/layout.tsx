@@ -6,12 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { theme } from './Themes/theme';
-import { Drawer, IconButton, List, ListItem, ListItemText, Toolbar, AppBar, Typography, Box } from '@mui/material'; // <-- Add these imports
-import MenuIcon from '@mui/icons-material/Menu'; // <-- Import the Menu Icon
-import { useState } from 'react';
-import  styles from "./style.module.scss"
 import ResponsiveDrawer from './components/drawer/Drawer';
-
+import { Box } from '@mui/material';
+import { UserIsLogin } from '@/middleware';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const inter = Inter({ subsets: ["latin"] });
 // type Metadata = any;
@@ -24,69 +22,34 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  UserIsLogin: boolean;
+
 }>) {
-  
+  const queryClient = new QueryClient();
+
+    console.log(UserIsLogin)
+
+ 
+ 
   return (
     <html lang="en">
       <AppRouterCacheProvider>
         <body className={inter.className}>
+        <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
             <ToastContainer theme='colored' position='top-center' autoClose={1000} />
-            {/* Add AppBar and Drawer */}
-            {/* <AppBar position="static" className={styles.Header} 
-            sx={{ width: { sm: "calc(100% - px)" },
-            ml: { sm: "250px" },}}
-            >
-              <Toolbar>
-                <IconButton  
-                className={styles.MenuIcon}
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
-                  onClick={toggleDrawer}
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Box>
-                   <Typography variant="h6" component="div">
-                Translator
-                </Typography>
-                <Typography variant="caption">
-                Free online translator enhanced by dictionary
-                </Typography>
-                </Box>
-               
-              </Toolbar>
-            </AppBar>
-
-            <Drawer
-            sx={{width:drawerWidth}}
-            className={styles.Drawer}
-              anchor="left"
-              open={drawerOpen}
-              onClose={toggleDrawer}
-              variant="permanent"
-            >
-              <List>
-                <ListItem button>
-                  <ListItemText primary="Home" />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText primary="About" />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText primary="Contact" />
-                </ListItem>
-              </List>
-            </Drawer> */}
-            <ResponsiveDrawer/>
-            <main>
+              <ResponsiveDrawer />
+              <Box sx={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+              <main>
               {children}
-            </main>
-
+              </main>
+  
+           </Box>
           </ThemeProvider>
+          </QueryClientProvider>
         </body>
       </AppRouterCacheProvider>
     </html>
   );
 }
+

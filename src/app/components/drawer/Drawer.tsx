@@ -12,10 +12,13 @@ import { AiOutlineMenu } from "react-icons/ai";
 import  styles from "./style.module.scss";
 import DialogNewProject from '../dialog NewProject/DialogNewProject';
 import Listsprojects from '../list Projects/Listsprojects';
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 
 const drawerWidth = 240;
-export default function ResponsiveDrawer() {
+export default function ResponsiveDrawer({ projects }: { projects?: any }) {
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
 
@@ -34,6 +37,11 @@ export default function ResponsiveDrawer() {
     }
   };
 
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    router.push("/sign-in");
+  };
+
   const drawerContent = (
     <Box className={styles.SideBar}>
       <Box className={styles.LogoContainer} >
@@ -48,12 +56,12 @@ export default function ResponsiveDrawer() {
      
         <Divider />
    
-        <Listsprojects/>
+        <Listsprojects projects={projects}  />
    
      
       <List  className={styles.FooterList}>
       <Divider />
-        <ListItem >
+        <ListItem className={styles.LogOut}  onClick={handleLogout} >
           <ListItemIcon>
           <HiOutlineLogout />
           </ListItemIcon>
@@ -93,7 +101,7 @@ export default function ResponsiveDrawer() {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+      
         <Drawer
           variant="temporary"
           open={mobileOpen}

@@ -1,57 +1,111 @@
 import * as React from 'react';
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField,
+  Select, MenuItem, FormControl, InputLabel 
+ } from '@mui/material';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { QueryClient, useMutation, useQuery, useQueryClient} from 'react-query';
+import { createProject, getAllProjects } from '@/app/Service/ProjectServices';
+import { toast } from 'react-toastify';
+import { schemaCreateProject } from '@/app/Utils/ProjectValidation';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { getLanguages } from '@/app/Service/LanguagesServices';
 
 interface IFormInput {
-  field1: string;
-  field2: string;
+  title:string;
+  targetLanguages:string[];
 }
 
 const DialogNewProject = () => {
+  const QueryClient = useQueryClient();
   const [open, setOpen] = React.useState(false);
-  
+  const { data: Allprojects} = useQuery('Allprojects', getAllProjects);
+  const { data: Languages } = useQuery('Languages', getLanguages);
+ 
+
   // react-hook-form 
-  const { register, handleSubmit, reset } = useForm<IFormInput>();
+  const { register, handleSubmit, reset ,control} = useForm<IFormInput>({
+    resolver: yupResolver(schemaCreateProject),
+    defaultValues: {
+      title: '',
+      targetLanguages:[],
+    },
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClickClose = () => {
     setOpen(false);
     reset();
   };
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log('Form Data:', data);
-    handleClose(); // Close dialog after submit
+  const { mutate: CreateNewProject} = useMutation(
+    (data: IFormInput) => createProject(data),
+    {
+      onSuccess: () => {
+        QueryClient.invalidateQueries('Allprojects');
+        setOpen(false);
+        reset();
+        toast.success('Project created successfully!');
+      },
+      onError: (error: any) => {
+        console.error("Error creating project:", error);
+        toast.error(error.response?.data?.message || 'An error occurred')
+      }
+    }
+  );
+
+  const onCreateProject: SubmitHandler<IFormInput> = async (data) => {
+    await CreateNewProject(data);
+    console.log(data);
+    handleClickClose();
   };
+
 
   return (
     <div>
       <Button variant="contained" onClick={handleClickOpen}>
         Project
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClickClose} fullWidth>
         <DialogTitle> Create New Project </DialogTitle>
         <DialogContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onCreateProject)}>
+
+          <FormControl fullWidth margin="dense">
             <TextField
-              margin="dense"
-              label="Languages"
+              label=" Project title"
               type="text"
-              fullWidth
-              {...register('field1', { required: true })}
+              {...register('title', { required: true })}
             />
-            <TextField
-              margin="dense"
-              label="Title Project"
-              type="text"
-              fullWidth
-              {...register('field2', { required: true })}
-            />
+
+          </FormControl>
+
+
+            <FormControl fullWidth margin="dense" >
+            <InputLabel >Languages</InputLabel>
+            <Controller
+            name="targetLanguages"
+            control={control}
+            render={({ field }) => (  
+              <Select                
+                labelId="target-languages-label"
+                {...field}          
+                multiple             
+              >
+                {Languages.map((language: any) => ( 
+                  <MenuItem key={language._id} value={language.code}>
+                    {language.name}    
+                  </MenuItem>
+                ))}
+              </Select>
+            )}>
+            </Controller>
+            </FormControl>
+            
             <DialogActions>
-              <Button onClick={handleClose} color="primary">
+              <Button onClick={handleClickClose} color="primary">
                 Cancel
               </Button>
               <Button type="submit" color="primary" variant='contained' >
