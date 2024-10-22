@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Cookies from "js-cookie";
 const api = axios.create({
-    baseURL: 'https://translation-production-95a3.up.railway.app'
+    // baseURL: 'https://translation-production-95a3.up.railway.app'
+     baseURL:'http://localhost:8000/'
   });
 
   export const getLanguages = async ()=> {
@@ -11,7 +12,10 @@ const api = axios.create({
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data)
+    // console.log(response.data)
       return response.data;
 
   }
+
+
+  

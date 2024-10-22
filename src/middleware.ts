@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 
 export let UserIsLogin = false ; 
 export function middleware(request: NextRequest) {
-    const protectedPaths = ['/home', '/'];
+    const protectedPaths = ['/home', '/' , '/projects', '/translation'];
 
     const authToken = request.cookies.get('authToken')?.value;
     

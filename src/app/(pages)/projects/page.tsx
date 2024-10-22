@@ -5,10 +5,10 @@ import ResponsiveDrawer from '@/app/components/drawer/Drawer';
 
 
 function page() {
-   const { data: Allprojects} = useQuery('Allprojects', getAllProjects);
+  
   return (
     <>
-    <ResponsiveDrawer projects={Allprojects}/>
+  
     </>
   )
 }

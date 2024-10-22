@@ -1,20 +1,21 @@
 "use client";
-
-import { Box, Typography } from '@mui/material';
-import { useParams } from 'next/navigation';
+import { getProjectsById } from '@/app/Service/ProjectServices';
+import { Container, } from '@mui/material';
 import React from 'react';
+import { useQuery } from 'react-query';
+import { TabsComponent } from '@/app/components/tabs/Tabs';
 
 const IdProject = ({ params }: { params: { id: string } }) => {
-  // const { id } = useParams();
+  //Get Project By ID 
+  const { data :ProjectsById, isLoading, error } = useQuery(
+    ["project", params.id],
+    () => getProjectsById(params.id),
+  );
   return (
-    <Box>
-     <div>
-      <h1>Project Details</h1>
-      <p>Project ID: {params.id}</p>
-    </div>
-    
-    </Box>
-  )
+    <Container>
+    <TabsComponent projectsId={ProjectsById}  />
+  </Container>
+);
 }
 
 export default IdProject

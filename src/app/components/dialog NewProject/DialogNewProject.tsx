@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField,
-  Select, MenuItem, FormControl, InputLabel 
+  Select, MenuItem, FormControl, InputLabel, 
+  Typography
  } from '@mui/material';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { QueryClient, useMutation, useQuery, useQueryClient} from 'react-query';
+import { useMutation, useQuery, useQueryClient} from 'react-query';
 import { createProject, getAllProjects } from '@/app/Service/ProjectServices';
 import { toast } from 'react-toastify';
 import { schemaCreateProject } from '@/app/Utils/ProjectValidation';
@@ -23,7 +24,7 @@ const DialogNewProject = () => {
  
 
   // react-hook-form 
-  const { register, handleSubmit, reset ,control} = useForm<IFormInput>({
+  const { register, handleSubmit, reset ,control , formState: { errors }} = useForm<IFormInput>({
     resolver: yupResolver(schemaCreateProject),
     defaultValues: {
       title: '',
@@ -78,6 +79,8 @@ const DialogNewProject = () => {
               label=" Project title"
               type="text"
               {...register('title', { required: true })}
+              error={!!errors.title}
+             helperText={errors.title?.message}
             />
 
           </FormControl>
@@ -92,8 +95,10 @@ const DialogNewProject = () => {
               <Select                
                 labelId="target-languages-label"
                 {...field}          
-                multiple             
+                multiple   
+                error={!!errors.targetLanguages}         
               >
+                
                 {Languages.map((language: any) => ( 
                   <MenuItem key={language._id} value={language.code}>
                     {language.name}    
@@ -102,6 +107,11 @@ const DialogNewProject = () => {
               </Select>
             )}>
             </Controller>
+            {errors.targetLanguages && (
+                <Typography variant="body2" color="error">
+                  {errors.targetLanguages.message}
+                </Typography>
+              )}
             </FormControl>
             
             <DialogActions>

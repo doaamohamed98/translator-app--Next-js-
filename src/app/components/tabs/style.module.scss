@@ -1,0 +1,29 @@
+ .ProjectTitle{
+    text-align: center;
+    margin: 10px  0 !important;
+ }
+ .ContainercardLanguages{
+        display: flex ;
+        justify-content: space-between;
+        gap: 10px !important;
+        @media (max-width: 767px){ 
+            display: flex;
+            flex-direction: column !important;
+          }
+        .cardLanguages{
+            background-color: #f4f4f4;
+            font-size: 1rem;
+            text-transform: capitalize;
+            padding: 2px 30px;
+            cursor: pointer;
+            text-align: center;
+            }
+    }
+    .Tabs{
+        text-align: center !important;
+        max-width: fit-content;
+        text-align: center;
+        display: flex;
+    }
+ 
+

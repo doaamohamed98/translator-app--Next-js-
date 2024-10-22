@@ -13,12 +13,13 @@ justify-content: space-between;
 align-items: center;
  text-transform:capitalize;
  color: $text-color;
-font-size: 1.2rem;
+font-size: 3rem;
 &:hover {
     background-color: $hover-Bgcolor-ListItem; 
     color:$hover-text-color-ListItem ;
   }
 .DeleteIcon{
+  font-size: 1.5rem;
     &:hover {
         color: $hover-color-Icon; 
       }
