@@ -1,0 +1,21 @@
+.Header{
+    background-color: white !important ;
+    color: black !important ;
+    .MenuIcon{
+        background-color: aqua !important;
+    }
+
+}
+
+.SideBar{
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+    height: 100vh;
+}
+
+.Container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

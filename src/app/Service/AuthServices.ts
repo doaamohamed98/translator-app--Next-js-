@@ -1,8 +1,6 @@
-import axios from 'axios';
 import Cookies from 'js-cookie';
-const api = axios.create({
-    baseURL: 'https://translation-production-95a3.up.railway.app'
-  });
+import api from './api';
+
 
 
 export const createUser = async (userData:any)=>{
@@ -18,8 +16,3 @@ export const LoginUser = async (userData:any)=>{
    return authToken
 }
 
-// export const isAuthenticated = (): boolean => {
-//   const authToken = Cookies.get('authToken');
-//   return !!authToken;
-// };
-// console.log(isAuthenticated());
