@@ -15,7 +15,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 
 interface UpdateDataForm {
@@ -41,9 +41,14 @@ const DialogUpdate = ({
 
   const languageKeys = Object.keys(languages);
   // console.log(languageKeys);
+  const languageArray = Object.values(languages);
+  console.log(languageArray)
+
+  console.log(translationData.id,IdProject._id)
+
   
 
-  const { register: update, handleSubmit: handleSubmitUpdate } =
+  const { register:update, handleSubmit:handleSubmitUpdate ,reset} =
     useForm<UpdateDataForm>({
       resolver: yupResolver(schemaUpdateTranslation),
       defaultValues: {
@@ -53,35 +58,53 @@ const DialogUpdate = ({
       },
     });
 
-  const SubmitUpdate = async (
-    IdProject: string,
-    IdTranslation: string,
-    dataUpdate: UpdateDataForm
-  ) => {
-    try {
-      const data = await UpdateTranslation(
-        IdProject,
-        IdTranslation,
-        dataUpdate
-      );
-      // queryClient.invalidateQueries("allTranslation");
-      console.log(data);
-      return data;
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "An error occurred");
-    }
-  };
+  // const submitUpdate = async (
+  //   IdProject: string,
+  //   IdTranslation: string,
+  //   dataUpdate: UpdateDataForm
+  // ) => {
+  //   try {
+  //     const data = await UpdateTranslation(
+  //       IdProject,
+  //       IdTranslation,
+  //       dataUpdate
+  //     );
+  //     // queryClient.invalidateQueries("allTranslation");
+  //     console.log(data);
+  //     return data;
+  //   } catch (error: any) {
+  //     toast.error(error.response?.data?.message || "An error occurred");
+  //   }
+  // };
+  
+
+  const handleTranslation = (data: UpdateDataForm,) => UpdateTranslation(IdProject._id,translationData.id,data);
+
+   const { mutate: createUpdateTranslation } = useMutation(handleTranslation, {
+  onSuccess: () => {
+    toast.success('Translation created successfully!')
+    queryClient.invalidateQueries('AllTranslation')
+  },
+  onError: (error: any) => {
+    console.error("Error creating Translation:", error);
+    toast.error(error.response?.data?.message || 'An error occurred')
+  }
+});
+
+const UpdateSubmit = (data:UpdateDataForm) => {
+  createUpdateTranslation(data);
+  console.log(data)
+  reset();
+};
+
+  
   return (
     <>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>Update Translation</DialogTitle>
 
         <DialogContent>
-          <form
-            onSubmit={handleSubmitUpdate((data) => {
-              SubmitUpdate(IdProject, translationData.id, data);
-            })}
-          >
+          <form onSubmit={handleSubmitUpdate(UpdateSubmit)}>
             <TextField
               {...update("key")}
               label="Key"
@@ -98,13 +121,15 @@ const DialogUpdate = ({
               <Select
                 multiple
                 {...update("UpdateLanguages")}
+                renderValue={(selected) => (
+                  <Box>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
                 defaultValue={languageKeys}
               >
-                {languageKeys.map((language) => (
-                  <MenuItem key={language} value={language}>
-                    {language}
-                  </MenuItem>
-                ))}
               </Select>
             </FormControl>
 

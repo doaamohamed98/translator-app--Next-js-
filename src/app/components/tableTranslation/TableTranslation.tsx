@@ -7,6 +7,7 @@ import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, Ta
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
+import styles from "./style.module.scss";
 
 interface TranslatData {
   key: string;
@@ -25,7 +26,7 @@ const TableTranslation = ({ projectsId }: { projectsId: any }) => {
     },
   });
 
-  console.log(projectsId);
+  // console.log(projectsId);
 
  
   const handleTranslation = (data: TranslatData,) => createTranslatProject(data,projectsId);
@@ -71,7 +72,7 @@ const TranslationSubmit = (data:TranslatData) => {
                   <TextField {...register("text")} variant="outlined" size="small" placeholder="Text" />
                 </TableCell>
                 <TableCell>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Box className={styles.ButtonContainer}>
                     <Button type="submit" variant="contained">
                       Submit
                     </Button>

@@ -5,7 +5,6 @@ import { useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import styles from "./style.module.scss";
 import DialogUpdate from '../dialogUpdateTranslation/DialogUpdate';
 
 const TableDisplayTranslation = ({ projectsId} : { projectsId: any}) => {
@@ -44,7 +43,7 @@ const TableDisplayTranslation = ({ projectsId} : { projectsId: any}) => {
       const handelDeleteTranslation = async (projectId: string , id: string) => {
         try{
          const data = await DeleteTranslation(projectId ,id );
-         queryClient.invalidateQueries(["allTranslation",]);
+         queryClient.invalidateQueries("allTranslation");
         return data;
         }catch(error:any){
          console.log(error)

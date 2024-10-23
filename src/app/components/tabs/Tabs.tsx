@@ -2,12 +2,10 @@ import { Box, Card, CardContent, Tab, Tabs, Typography } from "@mui/material";
 import React from "react";
 import styles from "./style.module.scss";
 import TableTranslation from "../tableTranslation/TableTranslation";
-import { useRouter } from "next/navigation";
 import TableDisplayTranslation from "../tableDisplayTranslation/TableDisplayTranslation";
 
 export const TabsComponent = ({ projectsId }: { projectsId: any }) => {
   const [value, setValue] = React.useState(0);
-  const router = useRouter()
   // console.log(projectsId);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
