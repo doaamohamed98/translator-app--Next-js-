@@ -1,9 +1,6 @@
-import axios from 'axios';
 import Cookies from 'js-cookie';
-const api = axios.create({
-    // baseURL: 'https://translation-production-95a3.up.railway.app'
-    baseURL:'http://localhost:8000/'
-  });
+import api from './api';
+
 
 
 export const createUser = async (userData:any)=>{

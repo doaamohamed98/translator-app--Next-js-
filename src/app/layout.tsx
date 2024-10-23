@@ -5,12 +5,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { theme } from "./Themes/theme";
+import { theme } from "./themes/theme";
 import ResponsiveDrawer from "./components/drawer/Drawer";
 import { Box } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import styles from "./style.module.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 // type Metadata = any;
@@ -51,14 +52,7 @@ export default function RootLayout({
 
               {isLogin && <ResponsiveDrawer />}
 
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                 
-                }}
-              >
+              <Box className={styles.Container}  >
                 <main>{children}</main>
               </Box>
             </ThemeProvider>

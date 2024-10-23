@@ -1,7 +1,7 @@
 "use client";
-import { createTranslatProject } from '@/app/Service/DictionariesServices';
-import { getAllProjects } from '@/app/Service/ProjectServices';
-import { schemaCreateTranslation } from '@/app/Utils/TranslationValidation';
+import { createTranslatProject } from '@/app/service/DictionariesServices';
+import { getAllProjects } from '@/app/service/ProjectServices';
+import { schemaCreateTranslation } from '@/app/utils/TranslationValidation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
@@ -26,9 +26,6 @@ const TableTranslation = ({ projectsId }: { projectsId: any }) => {
     },
   });
 
-  // console.log(projectsId);
-
- 
   const handleTranslation = (data: TranslatData,) => createTranslatProject(data,projectsId);
 
    const { mutate: createTranslation } = useMutation(handleTranslation, {
@@ -44,7 +41,6 @@ const TableTranslation = ({ projectsId }: { projectsId: any }) => {
 
 const TranslationSubmit = (data:TranslatData) => {
   createTranslation(data);
-  // console.log(data)
   reset();
 };
 

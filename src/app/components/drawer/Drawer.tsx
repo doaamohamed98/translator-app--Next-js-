@@ -24,7 +24,7 @@ import Listsprojects from "../list Projects/Listsprojects";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useQuery } from "react-query";
-import { getAllProjects } from "@/app/Service/ProjectServices";
+import { getAllProjects } from "@/app/service/ProjectServices";
 
 const drawerWidth = 240;
 export default function ResponsiveDrawer() {

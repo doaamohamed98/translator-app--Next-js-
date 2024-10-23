@@ -1,5 +1,5 @@
-import { UpdateTranslation } from "@/app/Service/DictionariesServices";
-import { schemaUpdateTranslation } from "@/app/Utils/UpdateValidation";
+import { UpdateTranslation } from "@/app/service/DictionariesServices";
+import { schemaUpdateTranslation } from "@/app/utils/UpdateValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Button,
@@ -40,13 +40,7 @@ const DialogUpdate = ({
   const queryClient = useQueryClient();
 
   const languageKeys = Object.keys(languages);
-  // console.log(languageKeys);
-  const languageArray = Object.values(languages);
-  console.log(languageArray)
-
-  console.log(translationData.id,IdProject._id)
-
-  
+  // const languageArray = Object.values(languages);
 
   const { register:update, handleSubmit:handleSubmitUpdate ,reset} =
     useForm<UpdateDataForm>({

@@ -6,7 +6,6 @@ import TableDisplayTranslation from "../tableDisplayTranslation/TableDisplayTran
 
 export const TabsComponent = ({ projectsId }: { projectsId: any }) => {
   const [value, setValue] = React.useState(0);
-  // console.log(projectsId);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
