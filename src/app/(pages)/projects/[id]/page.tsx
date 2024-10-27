@@ -1,5 +1,5 @@
 "use client";
-import { getProjectsById } from '@/app/Service/ProjectServices';
+import { getProjectsById } from '@/app/service/ProjectServices';
 import { Container, } from '@mui/material';
 import React from 'react';
 import { useQuery } from 'react-query';

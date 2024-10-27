@@ -8,7 +8,6 @@ export default function page({ children }: { children: React.ReactNode }) {
   return (
     <Box className={styles.ContainerLayout}>
       <main className={styles.main} >{children}</main>
-      { <ResponsiveDrawer />}
     </Box>
   );
 }

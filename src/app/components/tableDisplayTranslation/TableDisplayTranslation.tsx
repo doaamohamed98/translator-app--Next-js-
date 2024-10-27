@@ -1,44 +1,49 @@
-import { DeleteTranslation, getAllTranslation } from '@/app/Service/DictionariesServices';
-import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { DeleteTranslation, getAllTranslation } from '@/app/service/DictionariesServices';
+import { Box, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import DialogUpdate from '../dialogUpdateTranslation/DialogUpdate';
+import ConfirmDelete from '../comfirmDelete/ComfirmDelete';
 
-const TableDisplayTranslation = ({ projectsId} : { projectsId: any}) => {
+interface Project {
+  _id: string;
+  title: string;
+}
+
+const TableDisplayTranslation = ({ projectsId} : { projectsId: Project}) => {
   const queryClient = useQueryClient();
   const [selectedTranslation, setSelectedTranslation] = useState<any>(null);
 
-  const [openDialog, setOpenDialog] = useState(false); 
+  const [openUpdateDialog, setopenUpdateDialog] = useState(false); 
 
   const handleOpenDialog = (translation: any) => {
     setSelectedTranslation(translation);
-    setOpenDialog(true);
+    setopenUpdateDialog(true);
   };
 
   const handleCloseDialog = () => {
-    setOpenDialog(false);
+    setopenUpdateDialog(false);
   };
 
     const AllTranslation = async (projectId: string) => {
         return await getAllTranslation(projectId);
       };
 
-      const { data: translations,} = useQuery(
+      const { data: translations, error,} = useQuery(
         ["allTranslation", projectsId._id],
         () => AllTranslation(projectsId._id),
         {
           enabled: !!projectsId,
-          onSuccess: (data) => {
-            queryClient.invalidateQueries('allTranslation')
-          },
-          onError: (error:any) => {
-            toast.error(error.response?.data?.message || 'An error occurred');
-          },
         }
       );
+
+      if (error) {
+        toast.error((error as any).response?.data?.message || 'An error occurred');
+      }
+      
 
       const handelDeleteTranslation = async (projectId: string , id: string) => {
         try{
@@ -46,10 +51,12 @@ const TableDisplayTranslation = ({ projectsId} : { projectsId: any}) => {
          queryClient.invalidateQueries("allTranslation");
         return data;
         }catch(error:any){
-         console.log(error)
+          toast.error(error.response?.data?.message || 'An error occurred during delete')
         }
        
       }
+
+      
 
 
      
@@ -105,16 +112,25 @@ const TableDisplayTranslation = ({ projectsId} : { projectsId: any}) => {
           
           {/* Update */}
           <TableCell>
-            <Button variant="contained"  onClick={() => handleOpenDialog(data)} >
-              <CiEdit  />
-            </Button>
+              <IconButton  color='primary' 
+               onClick={() => handleOpenDialog(data)}>
+                <CiEdit  />
+              </IconButton>
           </TableCell>
 
           {/* Delete */}
          <TableCell>
-          <Button variant="contained">
-            <RiDeleteBin5Line onClick={()=>handelDeleteTranslation(projectsId._id,data.id)}/>
-          </Button>
+            <ConfirmDelete
+                    onConfirm={() => handelDeleteTranslation(projectsId._id,data.id)}
+                    title="Delete Confirmation"
+                     message="Are you sure you want to delete this translation?"
+                      trigger={
+                      <IconButton color="error">
+                        <RiDeleteBin5Line />
+                      </IconButton>
+                    }
+                  />
+       
           </TableCell>
      </TableRow>
   ))}
@@ -127,7 +143,7 @@ const TableDisplayTranslation = ({ projectsId} : { projectsId: any}) => {
 
     {selectedTranslation && (
         <DialogUpdate
-          open={openDialog}
+          open={openUpdateDialog}
           handleClose={handleCloseDialog}
           translationData={selectedTranslation}
           IdProject={projectsId}

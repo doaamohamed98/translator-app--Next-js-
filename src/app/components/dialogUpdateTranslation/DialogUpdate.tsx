@@ -1,6 +1,7 @@
 import { UpdateTranslation } from "@/app/service/DictionariesServices";
 import { schemaUpdateTranslation } from "@/app/utils/UpdateValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
+import HourglassBottomOutlinedIcon from '@mui/icons-material/HourglassBottomOutlined';
 import {
   Button,
   Chip,
@@ -52,32 +53,14 @@ const DialogUpdate = ({
       },
     });
 
-  // const submitUpdate = async (
-  //   IdProject: string,
-  //   IdTranslation: string,
-  //   dataUpdate: UpdateDataForm
-  // ) => {
-  //   try {
-  //     const data = await UpdateTranslation(
-  //       IdProject,
-  //       IdTranslation,
-  //       dataUpdate
-  //     );
-  //     // queryClient.invalidateQueries("allTranslation");
-  //     console.log(data);
-  //     return data;
-  //   } catch (error: any) {
-  //     toast.error(error.response?.data?.message || "An error occurred");
-  //   }
-  // };
-  
 
-  const handleTranslation = (data: UpdateDataForm,) => UpdateTranslation(IdProject._id,translationData.id,data);
+  const handleTranslation = ({key,text,UpdateLanguages}: UpdateDataForm,) => 
+    UpdateTranslation(IdProject._id,translationData.id,{key,text,UpdateLanguages});
 
-   const { mutate: createUpdateTranslation } = useMutation(handleTranslation, {
-  onSuccess: () => {
+   const { mutate: createUpdateTranslation, isLoading:isUpdateing } = useMutation(handleTranslation, {
+     onSuccess: () => {
     toast.success('Translation created successfully!')
-    queryClient.invalidateQueries('AllTranslation')
+    queryClient.invalidateQueries('allTranslation')
   },
   onError: (error: any) => {
     console.error("Error creating Translation:", error);
@@ -87,9 +70,10 @@ const DialogUpdate = ({
 
 const UpdateSubmit = (data:UpdateDataForm) => {
   createUpdateTranslation(data);
-  console.log(data)
   reset();
 };
+
+
 
   
   return (
@@ -130,9 +114,10 @@ const UpdateSubmit = (data:UpdateDataForm) => {
             <Button onClick={handleClose} variant="outlined">
               Cancel
             </Button>
-            <Button type="submit" variant="contained">
-              Update
+            <Button type="submit" variant="contained" onClick={handleClose} disabled={isUpdateing}>
+              {isUpdateing ? <> <HourglassBottomOutlinedIcon/> Updateing...</> : "Update"}
             </Button>
+
           </form>
         </DialogContent>
       </Dialog>

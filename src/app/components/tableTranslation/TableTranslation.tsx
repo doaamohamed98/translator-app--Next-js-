@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import styles from "./style.module.scss";
+import RotateLeftOutlinedIcon from '@mui/icons-material/RotateLeftOutlined';
 
 interface TranslatData {
   key: string;
@@ -15,9 +16,16 @@ interface TranslatData {
 }
 
 const TableTranslation = ({ projectsId }: { projectsId: any }) => {
-  const { data: Allprojects} = useQuery('Allprojects', getAllProjects);
-
   const queryClient = useQueryClient();
+
+  //Get All Projects
+  const { data: allProjects, isLoading:isProjectsLoading, isError } = useQuery({
+    queryKey: ['allProjects'],
+    queryFn: getAllProjects,
+  });
+
+
+  //Handel Fu React-hook-form
   const { register, handleSubmit , reset} = useForm<TranslatData>({
     resolver: yupResolver(schemaCreateTranslation),
     defaultValues: {
@@ -26,18 +34,40 @@ const TableTranslation = ({ projectsId }: { projectsId: any }) => {
     },
   });
 
-  const handleTranslation = (data: TranslatData,) => createTranslatProject(data,projectsId);
+//Handel Fn Create New Translation
+//   const handleTranslation = ({ key, text }: TranslatData) => 
+//     createTranslatProject({ key, text }, projectsId);
 
-   const { mutate: createTranslation } = useMutation(handleTranslation, {
-  onSuccess: () => {
-    toast.success('Translation created successfully!')
-    queryClient.invalidateQueries('AllTranslation')
-  },
-  onError: (error: any) => {
-    console.error("Error creating Translation:", error);
-    toast.error(error.response?.data?.message || 'An error occurred')
+// //    const { mutate: createTranslation , isLoading: isSubmitting  } = useMutation(handleTranslation, {
+// //   onSuccess: () => {
+// //     toast.success('Translation created successfully!')
+// //     queryClient.invalidateQueries('allTranslation')
+// //   },
+// //   onError: (error: any) => {
+// //     console.error("Error creating Translation:", error);
+// //     toast.error(error.response?.data?.message || 'An error occurred')
+// //   }
+// // });
+
+//Handel Fn Create New Translation
+const { mutate: createTranslation, isLoading: isSubmitting } = useMutation(
+  ({ key, text }: TranslatData) => createTranslatProject({ key, text }, projectsId),
+  {
+    onSuccess: () => {
+      toast.success('Translation created successfully!');
+      queryClient.invalidateQueries('allTranslation');
+      reset();
+    },
+    onError: (error: any) => {
+      console.error("Error creating Translation:", error);
+      toast.error(error.response?.data?.message || 'An error occurred');
+    },
   }
-});
+);
+
+
+
+
 
 const TranslationSubmit = (data:TranslatData) => {
   createTranslation(data);
@@ -47,7 +77,7 @@ const TranslationSubmit = (data:TranslatData) => {
 
   return (
     <>
-    {Allprojects ? (
+    {allProjects ? (
       <form onSubmit={handleSubmit(TranslationSubmit)}>
         <TableContainer>
           <Table>
@@ -68,9 +98,9 @@ const TranslationSubmit = (data:TranslatData) => {
                   <TextField {...register("text")} variant="outlined" size="small" placeholder="Text" />
                 </TableCell>
                 <TableCell>
-                  <Box className={styles.ButtonContainer}>
-                    <Button type="submit" variant="contained">
-                      Submit
+                  <Box className={styles.ButtonContainer} gap={2}>
+                    <Button type="submit" variant="contained" disabled={isSubmitting }>
+                    {isSubmitting ? <> <RotateLeftOutlinedIcon/> Submitting...</> : "Submit"}
                     </Button>
                     <Button type="reset" onClick={() => reset()} variant="contained">
                       Reset

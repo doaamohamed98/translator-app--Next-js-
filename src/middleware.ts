@@ -1,32 +1,31 @@
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-// export let UserIsLogin = false ; 
 export function middleware(request: NextRequest) {
-    const protectedPaths = ['/home', '/' , '/projects',];
+    const protectedPaths = ['/' ,'/projects','/sign-up','/sign-in'];
 
     const authToken = request.cookies.get('authToken')?.value;
     
-    // if(authToken){
-    //     UserIsLogin = true
-    // }
-    // console.log(authToken , UserIsLogin);
-
     const isProtectedPath = protectedPaths.some((path) =>
         request.nextUrl.pathname.startsWith(path)
     );
 
+    if ((request.nextUrl.pathname === '/sign-in' || request.nextUrl.pathname === '/sign-up') && authToken) {
+        return NextResponse.redirect(new URL('/', request.url));
+    } 
+
 
 
     if (isProtectedPath && !authToken) {
-         return NextResponse.redirect(new URL('/sign-in', request.url));
-    } 
-    
+        if (request.nextUrl.pathname !== '/sign-in' ) { 
+            return NextResponse.redirect(new URL('/sign-in', request.url));
+        }
+    }
 
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ['/home', '/', '/projects'], 
+    matcher: ['/home', '/', '/projects','/sign-up','/sign-in'], 
 };
 

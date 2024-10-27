@@ -49,26 +49,13 @@ export default function ResponsiveDrawer() {
 
   const handleLogout = () => {
     Cookies.remove("authToken");
-    router.push("/sign-in");
   };
 
   const {
-    data: Allprojects,
-    isLoading,
-    error,
-  } = useQuery("Allprojects", getAllProjects);
-  // if (isLoading)
-  //   return (
-  //     <Typography variant="h2">
-  //       Loading projects <AiOutlineLoading3Quarters />{" "}
-  //     </Typography>
-  //   );
-  // if (error)
-  //   return (
-  //     <Typography variant="h2">
-  //       Error loading projects <BiError color="yellow" />
-  //     </Typography>
-  //   );
+    data: Allprojects,} = useQuery({
+      queryKey: ['allProjects'],
+      queryFn: getAllProjects,
+    });
 
   const drawerContent = (
     <Box className={styles.SideBar}>

@@ -5,11 +5,11 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField,
  } from '@mui/material';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient} from 'react-query';
-import { createProject, getAllProjects } from '@/app/Service/ProjectServices';
+import { createProject} from '@/app/service/ProjectServices';
 import { toast } from 'react-toastify';
-import { schemaCreateProject } from '@/app/Utils/ProjectValidation';
+import { schemaCreateProject } from '@/app/utils/ProjectValidation';
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getLanguages } from '@/app/Service/LanguagesServices';
+import { getLanguages } from '@/app/service/LanguagesServices';
 
 interface IFormInput {
   title:string;
@@ -19,8 +19,10 @@ interface IFormInput {
 const DialogNewProject = () => {
   const QueryClient = useQueryClient();
   const [open, setOpen] = React.useState(false);
-  const { data: Allprojects} = useQuery('Allprojects', getAllProjects);
-  const { data: Languages } = useQuery('Languages', getLanguages);
+  const { data: Languages } = useQuery({
+    queryKey: ['Languages'],
+    queryFn: getLanguages,
+  });
  
 
   // react-hook-form 
@@ -45,7 +47,7 @@ const DialogNewProject = () => {
     (data: IFormInput) => createProject(data),
     {
       onSuccess: () => {
-        QueryClient.invalidateQueries('Allprojects');
+        QueryClient.invalidateQueries('allProjects');
         setOpen(false);
         reset();
         toast.success('Project created successfully!');
@@ -57,9 +59,8 @@ const DialogNewProject = () => {
     }
   );
 
-  const onCreateProject: SubmitHandler<IFormInput> = async (data) => {
-    await CreateNewProject(data);
-    console.log(data);
+  const onCreateProject: SubmitHandler<IFormInput> = (data) => {
+   CreateNewProject(data);
     handleClickClose();
   };
 
