@@ -35,21 +35,6 @@ const TableTranslation = ({ projectsId }: { projectsId: any }) => {
   });
 
 //Handel Fn Create New Translation
-//   const handleTranslation = ({ key, text }: TranslatData) => 
-//     createTranslatProject({ key, text }, projectsId);
-
-// //    const { mutate: createTranslation , isLoading: isSubmitting  } = useMutation(handleTranslation, {
-// //   onSuccess: () => {
-// //     toast.success('Translation created successfully!')
-// //     queryClient.invalidateQueries('allTranslation')
-// //   },
-// //   onError: (error: any) => {
-// //     console.error("Error creating Translation:", error);
-// //     toast.error(error.response?.data?.message || 'An error occurred')
-// //   }
-// // });
-
-//Handel Fn Create New Translation
 const { mutate: createTranslation, isLoading: isSubmitting } = useMutation(
   ({ key, text }: TranslatData) => createTranslatProject({ key, text }, projectsId),
   {
@@ -64,10 +49,6 @@ const { mutate: createTranslation, isLoading: isSubmitting } = useMutation(
     },
   }
 );
-
-
-
-
 
 const TranslationSubmit = (data:TranslatData) => {
   createTranslation(data);

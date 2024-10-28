@@ -59,7 +59,6 @@ import api from './api';
       },
 
     });
-
       return response.data;
     }catch(error:any){
       console.error("Error getting all translations:",error);
@@ -94,7 +93,10 @@ import api from './api';
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(response.data)
+    console.log(projectId,id,UpdateLanguages)
       return response.data;
+     
     }catch(error:any){
       console.error("Error Updateing translation:", error);
       throw new Error(error.response?.data?.message);

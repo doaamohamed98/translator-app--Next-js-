@@ -1,12 +1,11 @@
 import { DeleteTranslation, getAllTranslation } from '@/app/service/DictionariesServices';
-import { Box, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { Box,IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import DialogUpdate from '../dialogUpdateTranslation/DialogUpdate';
 import ConfirmDelete from '../comfirmDelete/ComfirmDelete';
+import DialogUpdate from '../dialogUpdate/DialogUpdate';
 
 interface Project {
   _id: string;
@@ -14,36 +13,19 @@ interface Project {
 }
 
 const TableDisplayTranslation = ({ projectsId} : { projectsId: Project}) => {
+
   const queryClient = useQueryClient();
-  const [selectedTranslation, setSelectedTranslation] = useState<any>(null);
-
-  const [openUpdateDialog, setopenUpdateDialog] = useState(false); 
-
-  const handleOpenDialog = (translation: any) => {
-    setSelectedTranslation(translation);
-    setopenUpdateDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setopenUpdateDialog(false);
-  };
-
     const AllTranslation = async (projectId: string) => {
         return await getAllTranslation(projectId);
       };
 
-      const { data: translations, error,} = useQuery(
+      const { data: translations,} = useQuery(
         ["allTranslation", projectsId._id],
         () => AllTranslation(projectsId._id),
         {
           enabled: !!projectsId,
         }
       );
-
-      if (error) {
-        toast.error((error as any).response?.data?.message || 'An error occurred');
-      }
-      
 
       const handelDeleteTranslation = async (projectId: string , id: string) => {
         try{
@@ -56,15 +38,12 @@ const TableDisplayTranslation = ({ projectsId} : { projectsId: Project}) => {
        
       }
 
-      
 
-
-     
   return (
     <>
     <Box sx={{ textAlign: "center"}}>
     <Typography variant='h5'> Project name : {projectsId.title}</Typography>
-    {translations?.data && translations?.dictionary ?(
+    {translations?.data && translations?.dictionary ? (
     <TableContainer>
       <Table stickyHeader>
         <TableHead>
@@ -112,10 +91,17 @@ const TableDisplayTranslation = ({ projectsId} : { projectsId: Project}) => {
           
           {/* Update */}
           <TableCell>
-              <IconButton  color='primary' 
-               onClick={() => handleOpenDialog(data)}>
-                <CiEdit  />
+            <DialogUpdate
+            translationData={data}
+            IdProject={projectsId}
+            languages={translations.dictionary}
+            trigger={
+              <IconButton  color='primary'>
+                <CiEdit />
               </IconButton>
+            }
+            />
+              
           </TableCell>
 
           {/* Delete */}
@@ -140,17 +126,6 @@ const TableDisplayTranslation = ({ projectsId} : { projectsId: Project}) => {
     ):(
     <Typography>No translations available your Project</Typography>
     )}
-
-    {selectedTranslation && (
-        <DialogUpdate
-          open={openUpdateDialog}
-          handleClose={handleCloseDialog}
-          translationData={selectedTranslation}
-          IdProject={projectsId}
-          languages={translations.dictionary}
-        />
-      )}
-     
   </Box>
     </>
     
