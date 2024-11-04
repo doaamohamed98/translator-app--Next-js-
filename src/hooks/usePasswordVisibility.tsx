@@ -1,7 +1,7 @@
 "use client";
-import { useState } from 'react';
-import { GoEye, GoEyeClosed } from 'react-icons/go';
-import { InputAdornment, IconButton } from '@mui/material';
+import { useState } from "react";
+import { GoEye, GoEyeClosed } from "react-icons/go";
+import { InputAdornment, IconButton } from "@mui/material";
 
 const usePasswordVisibility = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,7 +11,7 @@ const usePasswordVisibility = () => {
   };
 
   const getPasswordInputProps = () => ({
-    type: showPassword ? 'text' : 'password',
+    type: showPassword ? "text" : "password",
     InputProps: {
       endAdornment: (
         <InputAdornment position="end">

@@ -1,25 +1,33 @@
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
 export function middleware(request: NextRequest) {
-    const protectedPaths = ['/home', '/'];
+    const protectedPaths = ['/' ,'/projects','/sign-up','/sign-in'];
 
     const authToken = request.cookies.get('authToken')?.value;
-    // console.log(authToken);
-
     const isProtectedPath = protectedPaths.some((path) =>
         request.nextUrl.pathname.startsWith(path)
     );
-
-    if (isProtectedPath && !authToken) {
-         return NextResponse.redirect(new URL('/sign-in', request.url));
+   
+    if ((request.nextUrl.pathname === '/sign-in' || request.nextUrl.pathname === '/sign-up') && authToken) {
+        return NextResponse.redirect(new URL('/', request.url));
     } 
 
-    return NextResponse.next();
+
+
+    if (isProtectedPath && !authToken) {
+        if (request.nextUrl.pathname !== '/sign-in'&&request.nextUrl.pathname !== '/sign-up' ) { 
+            return NextResponse.redirect(new URL('/sign-in', request.url));
+        }
+    }
+
+   
+
 }
 
+
+
 export const config = {
-    matcher: ['/home', '/'], 
+    matcher: ['/home', '/', '/projects','/sign-up','/sign-in'], 
 };
 
